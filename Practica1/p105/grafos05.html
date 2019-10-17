@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module grafos05</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>grafos05</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/hey/Desktop/daalg/Practica1/grafos05.py">/home/hey/Desktop/daalg/Practica1/grafos05.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gzip.html">gzip</a><br>
+<a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="networkx.html">networkx</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="pickle.html">pickle</a><br>
+<a href="matplotlib.pyplot.html">matplotlib.pyplot</a><br>
+</td><td width="25%" valign=top><a href="random.html">random</a><br>
+<a href="sys.html">sys</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-TGF_2_d_g"><strong>TGF_2_d_g</strong></a>(f_name)</dt><dd><tt>Convierte&nbsp;un&nbsp;grafo&nbsp;en&nbsp;TGF&nbsp;a&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;f_name&nbsp;--&nbsp;Fichero&nbsp;en&nbsp;el&nbsp;que&nbsp;se&nbsp;encuentra&nbsp;&nbsp;el&nbsp;grafo&nbsp;en&nbsp;TGF.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.</tt></dd></dl>
+ <dl><dt><a name="-calculate_sparse_factor"><strong>calculate_sparse_factor</strong></a>(g)</dt><dd><tt>Calcula&nbsp;el&nbsp;factor&nbsp;de&nbsp;dispersion&nbsp;de&nbsp;un&nbsp;grafo&nbsp;representado&nbsp;como&nbsp;matriz.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;g&nbsp;--&nbsp;Matriz&nbsp;de&nbsp;adyacencias&nbsp;del&nbsp;grafo.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;del&nbsp;grafo&nbsp;(float).</tt></dd></dl>
+ <dl><dt><a name="-check_sparse_factor"><strong>check_sparse_factor</strong></a>(n_grafos, n_nodes, sparse_factor)</dt><dd><tt>Funcion&nbsp;que&nbsp;comprueba&nbsp;que&nbsp;los&nbsp;factores&nbsp;de&nbsp;dispersion&nbsp;generados&nbsp;concuerdan<br>
+con&nbsp;los&nbsp;esperados.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_grafos&nbsp;--&nbsp;Número&nbsp;de&nbsp;grafos&nbsp;a&nbsp;generar&nbsp;para&nbsp;la&nbsp;comprobacion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes&nbsp;--&nbsp;Número&nbsp;de&nbsp;nodos&nbsp;de&nbsp;cada&nbsp;grafo&nbsp;generado.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sparse_factor&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;esperado.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Media&nbsp;de&nbsp;los&nbsp;factores&nbsp;de&nbsp;dispersion&nbsp;obtenidos&nbsp;(float).<br>
+Nota:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Idealmente&nbsp;el&nbsp;retorno&nbsp;y&nbsp;el&nbsp;sparse_factor&nbsp;dado&nbsp;como&nbsp;argumento&nbsp;son<br>
+&nbsp;&nbsp;&nbsp;&nbsp;muy&nbsp;parecidos.</tt></dd></dl>
+ <dl><dt><a name="-cuenta_ramas"><strong>cuenta_ramas</strong></a>(m_g)</dt><dd><tt>Cuenta&nbsp;el&nbsp;numero&nbsp;de&nbsp;ramas&nbsp;en&nbsp;grafo&nbsp;representado&nbsp;como&nbsp;matriz.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;m_g&nbsp;--&nbsp;Matriz&nbsp;de&nbsp;adyacencia&nbsp;que&nbsp;representa&nbsp;al&nbsp;grafo.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Numero&nbsp;(entero)&nbsp;de&nbsp;ramas.</tt></dd></dl>
+ <dl><dt><a name="-d_g_2_TGF"><strong>d_g_2_TGF</strong></a>(d_g, f_name)</dt><dd><tt>Escribe&nbsp;un&nbsp;grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias&nbsp;en&nbsp;TGF.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;f_name&nbsp;--&nbsp;Fichero&nbsp;en&nbsp;el&nbsp;que&nbsp;se&nbsp;volcara&nbsp;el&nbsp;grafo&nbsp;como&nbsp;TGF.</tt></dd></dl>
+ <dl><dt><a name="-d_g_2_m_g"><strong>d_g_2_m_g</strong></a>(d_g)</dt><dd><tt>Transforma&nbsp;una&nbsp;listas&nbsp;de&nbsp;adyacencias&nbsp;en&nbsp;una&nbsp;matriz&nbsp;de&nbsp;adyacencia.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;matriz&nbsp;de&nbsp;adyacencias.</tt></dd></dl>
+ <dl><dt><a name="-d_g_2_nx_g"><strong>d_g_2_nx_g</strong></a>(d_g)</dt><dd><tt>Convierte&nbsp;un&nbsp;grafo&nbsp;en&nbsp;lista&nbsp;de&nbsp;adyacencias&nbsp;en&nbsp;uno&nbsp;de&nbsp;NetworkX.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Grafo&nbsp;como&nbsp;objeto&nbsp;de&nbsp;libreria&nbsp;de&nbsp;NetworkX.</tt></dd></dl>
+ <dl><dt><a name="-dijkstra_d"><strong>dijkstra_d</strong></a>(d_g, u)</dt><dd><tt>Ejecuta&nbsp;dijkstra&nbsp;sobre&nbsp;un&nbsp;grafo&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;--&nbsp;Nodo&nbsp;desde&nbsp;el&nbsp;que&nbsp;se&nbsp;inicia&nbsp;el&nbsp;algoritmo.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(a,b):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;--&nbsp;Lista&nbsp;de&nbsp;distancias&nbsp;minimas&nbsp;(a[i]&nbsp;distancia&nbsp;minima&nbsp;de&nbsp;u&nbsp;a&nbsp;i).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;--&nbsp;Lista&nbsp;de&nbsp;padres&nbsp;en&nbsp;caminos&nbsp;minimos&nbsp;(a[i]&nbsp;padre&nbsp;de&nbsp;i).</tt></dd></dl>
+ <dl><dt><a name="-dijkstra_m"><strong>dijkstra_m</strong></a>(m_g, u)</dt><dd><tt>Ejecuta&nbsp;dijkstra&nbsp;sobre&nbsp;un&nbsp;grafo&nbsp;como&nbsp;matriz&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;m_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;matriz&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;--&nbsp;Nodo&nbsp;desde&nbsp;el&nbsp;que&nbsp;se&nbsp;inicia&nbsp;el&nbsp;algoritmo.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(a,b):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;--&nbsp;Lista&nbsp;de&nbsp;distancias&nbsp;minimas&nbsp;(a[i]&nbsp;distancia&nbsp;minima&nbsp;de&nbsp;u&nbsp;a&nbsp;i).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;--&nbsp;Lista&nbsp;de&nbsp;padres&nbsp;en&nbsp;caminos&nbsp;minimos&nbsp;(a[i]&nbsp;padre&nbsp;de&nbsp;i).</tt></dd></dl>
+ <dl><dt><a name="-edges"><strong>edges</strong></a>(d_g)</dt><dd><tt>Dado&nbsp;un&nbsp;grafo&nbsp;representado&nbsp;como&nbsp;diccionario&nbsp;devuelve&nbsp;una&nbsp;lista&nbsp;de&nbsp;sus&nbsp;ramas<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;diccionario&nbsp;de&nbsp;diccionarios<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Una&nbsp;lista&nbsp;de&nbsp;3-tuplas&nbsp;con&nbsp;todas&nbsp;las&nbsp;ramas&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[(nodo_origen1,&nbsp;nodo_destino1,&nbsp;peso1),&nbsp;...]</tt></dd></dl>
+ <dl><dt><a name="-fit_plot"><strong>fit_plot</strong></a>(l, func_2_fit, size_ini, size_fin, step, label=None, rho=False, xlabel=None, ylabel=None)</dt><dd><tt>Función&nbsp;aportada&nbsp;en&nbsp;el&nbsp;notebook&nbsp;auxiliar</tt></dd></dl>
+ <dl><dt><a name="-m_g_2_d_g"><strong>m_g_2_d_g</strong></a>(m_g)</dt><dd><tt>Transforma&nbsp;una&nbsp;matriz&nbsp;de&nbsp;adyacencias&nbsp;en&nbsp;listas&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;m_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;matriz&nbsp;de&nbsp;adyacencias.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Grafo&nbsp;represenado&nbsp;como&nbsp;diccionario&nbsp;de&nbsp;listas&nbsp;de&nbsp;adyacencias</tt></dd></dl>
+ <dl><dt><a name="-min_path"><strong>min_path</strong></a>(d_prev, v)</dt><dd><tt>Recupera&nbsp;el&nbsp;camino&nbsp;minimo&nbsp;hasta&nbsp;v&nbsp;dado&nbsp;el&nbsp;retorno&nbsp;de&nbsp;Dijkstra.<br>
+&nbsp;<br>
+Argumento:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_prev&nbsp;--&nbsp;Lista&nbsp;de&nbsp;padres&nbsp;devuelta&nbsp;por&nbsp;Dijkstra.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v&nbsp;--&nbsp;Nodo&nbsp;final&nbsp;del&nbsp;camino&nbsp;buscado.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista&nbsp;con&nbsp;el&nbsp;camino&nbsp;de&nbsp;u&nbsp;a&nbsp;v&nbsp;([u&nbsp;x1&nbsp;x2&nbsp;...&nbsp;xk&nbsp;v])&nbsp;si&nbsp;existe.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Si&nbsp;no&nbsp;hay&nbsp;camino&nbsp;devuelve&nbsp;[].</tt></dd></dl>
+ <dl><dt><a name="-min_paths"><strong>min_paths</strong></a>(d_prev)</dt><dd><tt>Devuelve&nbsp;un&nbsp;hash&nbsp;con&nbsp;todos&nbsp;los&nbsp;caminos&nbsp;minimos&nbsp;encontrados&nbsp;en&nbsp;Dijkstra.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_prev&nbsp;--&nbsp;Lista&nbsp;de&nbsp;padres&nbsp;devuelta&nbsp;por&nbsp;Dijkstra.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Un&nbsp;hash&nbsp;que&nbsp;asocia&nbsp;a&nbsp;cada&nbsp;nodo&nbsp;su&nbsp;camino&nbsp;minimo&nbsp;({u:&nbsp;<a href="#-min_path">min_path</a>(u)}).</tt></dd></dl>
+ <dl><dt><a name="-n2_log_n"><strong>n2_log_n</strong></a>(n)</dt><dd><tt>Función&nbsp;aportada&nbsp;en&nbsp;el&nbsp;notebook&nbsp;auxiliar</tt></dd></dl>
+ <dl><dt><a name="-nx_g_2_d_g"><strong>nx_g_2_d_g</strong></a>(nx_g)</dt><dd><tt>Convierte&nbsp;un&nbsp;grafo&nbsp;de&nbsp;NetworkX&nbsp;en&nbsp;uno&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nx_g&nbsp;--&nbsp;Grafo&nbsp;como&nbsp;objeto&nbsp;de&nbsp;NetworkX.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Grafo&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.</tt></dd></dl>
+ <dl><dt><a name="-print_d_g"><strong>print_d_g</strong></a>(d_g)</dt><dd><tt>Función&nbsp;aportada&nbsp;en&nbsp;el&nbsp;notebook&nbsp;auxiliar</tt></dd></dl>
+ <dl><dt><a name="-print_m_g"><strong>print_m_g</strong></a>(m_g)</dt><dd><tt>Función&nbsp;aportada&nbsp;en&nbsp;el&nbsp;notebook&nbsp;auxiliar</tt></dd></dl>
+ <dl><dt><a name="-rand_matr_pos_graph"><strong>rand_matr_pos_graph</strong></a>(n_nodes, sparse_factor, max_weight=50, decimals=0)</dt><dd><tt>Genera&nbsp;un&nbsp;grafo&nbsp;aleatorio&nbsp;en&nbsp;forma&nbsp;de&nbsp;matriz&nbsp;de&nbsp;adyacencia.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes&nbsp;--&nbsp;Numero&nbsp;de&nbsp;nodos&nbsp;del&nbsp;grafo&nbsp;(del&nbsp;0&nbsp;al&nbsp;n_nodes-1).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sparse_factor&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;APROXIMADO&nbsp;de&nbsp;la&nbsp;matriz&nbsp;generada.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_weight&nbsp;--&nbsp;Peso&nbsp;maximo&nbsp;de&nbsp;las&nbsp;ramas&nbsp;del&nbsp;grafo&nbsp;(son&nbsp;enteros).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;decimals&nbsp;--&nbsp;??.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Una&nbsp;matriz&nbsp;de&nbsp;adyacencias&nbsp;que&nbsp;representa&nbsp;al&nbsp;grafo&nbsp;generado.</tt></dd></dl>
+ <dl><dt><a name="-read_object"><strong>read_object</strong></a>(f_name, save_path='.')</dt><dd><tt>Carga&nbsp;un&nbsp;objeto&nbsp;serializado&nbsp;con&nbsp;pickle&nbsp;de&nbsp;un&nbsp;fichero&nbsp;comprimido.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;f_name&nbsp;--&nbsp;Nombre&nbsp;del&nbsp;fichero&nbsp;que&nbsp;contiene&nbsp;el&nbsp;objeto.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;save_path&nbsp;--&nbsp;Ruta&nbsp;al&nbsp;directorio&nbsp;donde&nbsp;esta&nbsp;f_name.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Objeto&nbsp;cargado.</tt></dd></dl>
+ <dl><dt><a name="-save_object"><strong>save_object</strong></a>(obj, f_name='obj.pklz', save_path='.')</dt><dd><tt>Serializa&nbsp;con&nbsp;pickle&nbsp;y&nbsp;guarda&nbsp;un&nbsp;objeto&nbsp;en&nbsp;un&nbsp;fichero&nbsp;comprimido.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj&nbsp;--&nbsp;Objeto&nbsp;que&nbsp;queremos&nbsp;serializar.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;f_name&nbsp;--&nbsp;Nombre&nbsp;del&nbsp;fichero&nbsp;en&nbsp;el&nbsp;que&nbsp;escribiremos&nbsp;el&nbsp;objeto.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;save_path&nbsp;--&nbsp;Ruta&nbsp;hasta&nbsp;el&nbsp;directorio&nbsp;donde&nbsp;se&nbsp;escribe&nbsp;el&nbsp;fichero.</tt></dd></dl>
+ <dl><dt><a name="-time"><strong>time</strong></a>(...)</dt><dd><tt><a href="#-time">time</a>()&nbsp;-&gt;&nbsp;floating&nbsp;point&nbsp;number<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;time&nbsp;in&nbsp;seconds&nbsp;since&nbsp;the&nbsp;Epoch.<br>
+Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;the&nbsp;system&nbsp;clock&nbsp;provides&nbsp;them.</tt></dd></dl>
+ <dl><dt><a name="-time_dijks_rho"><strong>time_dijks_rho</strong></a>(rho_ini, rho_fin, step, dijks, generate, n_nodes=100, n_graphs=30, for_all_nodes=True)</dt><dd><tt>Calcula&nbsp;tiempos&nbsp;de&nbsp;ejecucion&nbsp;de&nbsp;Dijkstra&nbsp;iterando&nbsp;sobre&nbsp;el&nbsp;<br>
+factor&nbsp;de&nbsp;dispersion.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rho_ini&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;inicial.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rho_fin&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;final.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;step&nbsp;--&nbsp;Incremento&nbsp;del&nbsp;factor&nbsp;de&nbsp;dispersion&nbsp;en&nbsp;cada&nbsp;iteracion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dijks&nbsp;(funcion)--&nbsp;Algoritmo&nbsp;de&nbsp;Dijkstra&nbsp;a&nbsp;utilizar.&nbsp;Recibe&nbsp;el&nbsp;grafo&nbsp;y&nbsp;el&nbsp;nodo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inicial.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;generate&nbsp;(funcion)--&nbsp;Generador&nbsp;de&nbsp;grafos&nbsp;aleatorios.&nbsp;Recibe&nbsp;número&nbsp;de&nbsp;nodos&nbsp;y<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factor&nbsp;de&nbsp;dispersion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes&nbsp;--&nbsp;Número&nbsp;fijo&nbsp;de&nbsp;nodos&nbsp;con&nbsp;los&nbsp;que&nbsp;se&nbsp;genera&nbsp;el&nbsp;grafo&nbsp;aleatorio.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_graphs&nbsp;--&nbsp;Número&nbsp;de&nbsp;grafos&nbsp;generados&nbsp;en&nbsp;cada&nbsp;iteracion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for_all_nodes&nbsp;(boolean)--&nbsp;Si&nbsp;Dijkstra&nbsp;se&nbsp;ejecuta&nbsp;desde&nbsp;todos&nbsp;los&nbsp;nodos&nbsp;o&nbsp;solo&nbsp;desde<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;el&nbsp;inicial.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista&nbsp;de&nbsp;tiempos&nbsp;medios&nbsp;correspondientes&nbsp;a&nbsp;cada&nbsp;factor&nbsp;de&nbsp;dispersion&nbsp;desde&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rho_ini&nbsp;a&nbsp;rho_fin&nbsp;(incluidos&nbsp;ambos)&nbsp;a&nbsp;pasos&nbsp;de&nbsp;step.<br>
+Nota:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;En&nbsp;caso&nbsp;de&nbsp;que&nbsp;for_all_nodes&nbsp;sea&nbsp;True&nbsp;entonces&nbsp;el&nbsp;tiempo&nbsp;de&nbsp;ejecucion&nbsp;corresponde<br>
+&nbsp;&nbsp;&nbsp;&nbsp;con&nbsp;el&nbsp;tiempo&nbsp;que&nbsp;tarda&nbsp;en&nbsp;ejecutar&nbsp;Dijkstra&nbsp;desde&nbsp;TODOS&nbsp;los&nbsp;nodos.</tt></dd></dl>
+ <dl><dt><a name="-time_dijkstra"><strong>time_dijkstra</strong></a>(n_graphs, n_nodes_ini, n_nodes_fin, step, generate, dijks, sparse_factor=0.25)</dt><dd><tt>Funcion&nbsp;que&nbsp;calcula&nbsp;los&nbsp;tiempos&nbsp;de&nbsp;ejecucion&nbsp;de&nbsp;Dijkstra&nbsp;para&nbsp;varios&nbsp;tamaños.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_graphs&nbsp;--&nbsp;Número&nbsp;de&nbsp;grafos&nbsp;a&nbsp;generar&nbsp;por&nbsp;cada&nbsp;tamaño.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes_ini&nbsp;--&nbsp;Primer&nbsp;tamaño&nbsp;de&nbsp;grafo&nbsp;utilizado.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes_fin&nbsp;--&nbsp;Último&nbsp;tamaño&nbsp;de&nbsp;grafo&nbsp;utilizado.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;step&nbsp;--&nbsp;Incremento&nbsp;del&nbsp;número&nbsp;de&nbsp;nodos&nbsp;en&nbsp;cada&nbsp;iteracion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;generate&nbsp;(funcion)--&nbsp;Funcion&nbsp;que&nbsp;genera&nbsp;un&nbsp;grafo&nbsp;aleatorio&nbsp;dado&nbsp;el&nbsp;número&nbsp;de<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodos&nbsp;y&nbsp;el&nbsp;factor&nbsp;de&nbsp;dispersion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dijks&nbsp;(funcion)--&nbsp;Dijkstra&nbsp;a&nbsp;utilizar.&nbsp;Recibe&nbsp;el&nbsp;grafo&nbsp;generado&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;el&nbsp;nodo&nbsp;de&nbsp;partida.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sparse_factor&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;de&nbsp;los&nbsp;grafos&nbsp;generados.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelva&nbsp;una&nbsp;lista&nbsp;de&nbsp;tiempos&nbsp;en&nbsp;segundos.&nbsp;El&nbsp;primer&nbsp;tiempo&nbsp;corresponde<br>
+&nbsp;&nbsp;&nbsp;&nbsp;con&nbsp;el&nbsp;tiempo&nbsp;medio&nbsp;necesario&nbsp;para&nbsp;ejecutar&nbsp;Dijkstra&nbsp;desde&nbsp;todos&nbsp;los<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nodos&nbsp;en&nbsp;un&nbsp;grafo&nbsp;de&nbsp;n_nodes_ini,&nbsp;el&nbsp;segundo&nbsp;correspondera&nbsp;con&nbsp;un&nbsp;grafo&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;de&nbsp;n_nodes_ini+step,&nbsp;asi&nbsp;sucesivamente&nbsp;hasta&nbsp;n_nodes_fin.<br>
+Nota:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Los&nbsp;tiempos&nbsp;medios&nbsp;devueltos&nbsp;corresponden&nbsp;con&nbsp;el&nbsp;tiempo&nbsp;medio&nbsp;para<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ejecutar&nbsp;Dijkstra&nbsp;desde&nbsp;TODOS&nbsp;los&nbsp;nodos&nbsp;(NO&nbsp;desde&nbsp;un&nbsp;solo&nbsp;nodo).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Se&nbsp;toma&nbsp;esta&nbsp;decision&nbsp;porque&nbsp;la&nbsp;funcion&nbsp;de&nbsp;fit_plot&nbsp;proporcionada<br>
+&nbsp;&nbsp;&nbsp;&nbsp;busca&nbsp;ajustar&nbsp;una&nbsp;n^3*log(n).<br>
+Nota2:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Utilizamos&nbsp;el&nbsp;mismo&nbsp;codigo&nbsp;tanto&nbsp;para&nbsp;diccionarios,&nbsp;como&nbsp;para&nbsp;matrices<br>
+&nbsp;&nbsp;&nbsp;&nbsp;como&nbsp;para&nbsp;grafos&nbsp;de&nbsp;networkx,&nbsp;entonces&nbsp;los&nbsp;vertices&nbsp;tienen&nbsp;que&nbsp;ser&nbsp;nums<br>
+&nbsp;&nbsp;&nbsp;&nbsp;de&nbsp;entre&nbsp;0&nbsp;y&nbsp;numero&nbsp;de&nbsp;nodos&nbsp;&nbsp;-1</tt></dd></dl>
+ <dl><dt><a name="-time_dijkstra_d"><strong>time_dijkstra_d</strong></a>(n_graphs, n_nodes_ini, n_nodes_fin, step, sparse_factor=0.25)</dt><dd><tt>Instancia&nbsp;de&nbsp;time_dijkstra&nbsp;para&nbsp;lista&nbsp;de&nbsp;adyacencia.<br>
+&nbsp;<br>
+NOTA:&nbsp;Detalles&nbsp;del&nbsp;funcionamiento&nbsp;en&nbsp;time_dijkstra.</tt></dd></dl>
+ <dl><dt><a name="-time_dijkstra_m"><strong>time_dijkstra_m</strong></a>(n_graphs, n_nodes_ini, n_nodes_fin, step, sparse_factor=0.25)</dt><dd><tt>Instancia&nbsp;de&nbsp;time_dijkstra&nbsp;para&nbsp;matrices&nbsp;de&nbsp;adyacencia.<br>
+&nbsp;<br>
+NOTA:&nbsp;Detalles&nbsp;del&nbsp;funcionamiento&nbsp;en&nbsp;time_dijkstra.</tt></dd></dl>
+ <dl><dt><a name="-time_dijkstra_nx"><strong>time_dijkstra_nx</strong></a>(n_graphs, n_nodes_ini, n_nodes_fin, step, sparse_factor=0.25)</dt><dd><tt>Instancia&nbsp;de&nbsp;time_dijkstra&nbsp;para&nbsp;grafos&nbsp;de&nbsp;NetworkX.<br>
+&nbsp;<br>
+NOTA:&nbsp;Detalles&nbsp;del&nbsp;funcionamiento&nbsp;en&nbsp;time_dijkstra.</tt></dd></dl>
+</td></tr></table>
+</body></html>

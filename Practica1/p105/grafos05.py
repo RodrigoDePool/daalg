@@ -265,7 +265,7 @@ def min_path(d_prev, v):
         Si no hay camino devuelve [].
     """
     if d_prev[v] == -2:
-        return [v] # This is the first node of Dijks
+        return [v]  # This is the first node of Dijks
     elif d_prev[v] < 0:
         return []  # There is no path
     path = [v]
@@ -304,9 +304,9 @@ def time_dijkstra(n_graphs,
         n_nodes_ini -- Primer tamaño de grafo utilizado.
         n_nodes_fin -- Último tamaño de grafo utilizado.
         step -- Incremento del número de nodos en cada iteracion.
-        generate -- Funcion que genera un grafo aleatorio dado el número de
+        generate (funcion)-- Funcion que genera un grafo aleatorio dado el número de
                     nodos y el factor de dispersion.
-        dijks -- Dijkstra a utilizar. Recibe el grafo generado 
+        dijks (funcion)-- Dijkstra a utilizar. Recibe el grafo generado 
                  y el nodo de partida.
         sparse_factor -- Factor de dispersion de los grafos generados.
     Retorno:
@@ -393,6 +393,8 @@ def fit_plot(l,
              rho=False,
              xlabel=None,
              ylabel=None):
+    """Función aportada en el notebook auxiliar
+    """
     if not rho:
         x_vals = [i for i in range(size_ini, size_fin + 1, step)]
         l_func_values = [
@@ -425,10 +427,14 @@ def fit_plot(l,
 
 
 def n2_log_n(n):
+    """Función aportada en el notebook auxiliar
+    """
     return n**2. * np.log(n)
 
 
 def print_m_g(m_g):
+    """Función aportada en el notebook auxiliar
+    """
     print("graph_from_matrix:\n")
     n_v = m_g.shape[0]
     for u in range(n_v):
@@ -438,6 +444,8 @@ def print_m_g(m_g):
 
 
 def print_d_g(d_g):
+    """Función aportada en el notebook auxiliar
+    """
     print("\ngraph_from_dict:\n")
     for u in d_g.keys():
         for v in d_g[u].keys():
@@ -448,8 +456,14 @@ def print_d_g(d_g):
 
 
 def edges(d_g):
-    # Funcion auxiliar privada. Devuelve una lista de aristas de una grafo
-    # representado como matriz
+    """Dado un grafo representado como diccionario devuelve una lista de sus ramas
+
+    Argumentos:
+        d_g -- Grafo representado como diccionario de diccionarios
+    Retorno:
+        Una lista de 3-tuplas con todas las ramas 
+        [(nodo_origen1, nodo_destino1, peso1), ...]
+    """
     e = []
     for u in d_g:
         for v in d_g[u]:
@@ -524,13 +538,13 @@ def time_dijks_rho(rho_ini,
         rho_ini -- Factor de dispersion inicial.
         rho_fin -- Factor de dispersion final.
         step -- Incremento del factor de dispersion en cada iteracion.
-        dijks -- Algoritmo de Dijkstra a utilizar. Recibe el grafo y el nodo
+        dijks (funcion)-- Algoritmo de Dijkstra a utilizar. Recibe el grafo y el nodo
                  inicial.
-        generate -- Generador de grafos aleatorios. Recibe número de nodos y
+        generate (funcion)-- Generador de grafos aleatorios. Recibe número de nodos y
                     factor de dispersion.
         n_nodes -- Número fijo de nodos con los que se genera el grafo aleatorio.
         n_graphs -- Número de grafos generados en cada iteracion.
-        for_all_nodes -- Si Dijkstra se ejecuta desde todos los nodos o solo desde
+        for_all_nodes (boolean)-- Si Dijkstra se ejecuta desde todos los nodos o solo desde
                          el inicial.
     Retorno:
         Lista de tiempos medios correspondientes a cada factor de dispersion desde 
