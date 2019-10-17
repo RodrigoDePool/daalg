@@ -18,9 +18,9 @@ def rand_matr_pos_graph(n_nodes, sparse_factor, max_weight=50, decimals=0):
     """ Genera un grafo aleatorio en forma de matriz de adyacencia.
 
     Argumentos:
-        n_nodes -- Número de nodos del grafo (del 0 al n_nodes-1).
-        sparse_factor -- Factor de dispersión APROXIMADO de la matriz generada.
-        max_weight -- Peso máximo de las ramas del grafo (son enteros).
+        n_nodes -- Numero de nodos del grafo (del 0 al n_nodes-1).
+        sparse_factor -- Factor de dispersion APROXIMADO de la matriz generada.
+        max_weight -- Peso maximo de las ramas del grafo (son enteros).
         decimals -- ??.
     Retorno:
         Una matriz de adyacencias que representa al grafo generado.
@@ -34,12 +34,12 @@ def rand_matr_pos_graph(n_nodes, sparse_factor, max_weight=50, decimals=0):
 
 
 def cuenta_ramas(m_g):
-    """ Cuenta el número de ramas en grafo representado como matriz.
+    """ Cuenta el numero de ramas en grafo representado como matriz.
 
     Argumentos:
         m_g -- Matriz de adyacencia que representa al grafo.
     Retorno:
-        Número (entero) de ramas.
+        Numero (entero) de ramas.
     """
     l = 0
     for i in range(0, len(m_g)):
@@ -50,26 +50,26 @@ def cuenta_ramas(m_g):
 
 
 def calculate_sparse_factor(g):
-    """Calcula el factor de dispersión de un grafo representado como matriz.
+    """Calcula el factor de dispersion de un grafo representado como matriz.
 
     Argumentos:
         g -- Matriz de adyacencias del grafo.
     Retorno:
-        Factor de dispersión del grafo (float).
+        Factor de dispersion del grafo (float).
     """
     return (cuenta_ramas(g)) / (len(g) * (len(g) - 1.0))
 
 
 def check_sparse_factor(n_grafos, n_nodes, sparse_factor):
-    """Función que comprueba que los factores de dispersión generados concuerdan
+    """Funcion que comprueba que los factores de dispersion generados concuerdan
     con los esperados.
 
     Argumentos:
-        n_grafos -- Número de grafos a generar para la comprobación.
+        n_grafos -- Número de grafos a generar para la comprobacion.
         n_nodes -- Número de nodos de cada grafo generado.
-        sparse_factor -- Factor de dispersión esperado.
+        sparse_factor -- Factor de dispersion esperado.
     Retorno:
-        Media de los factores de dispersión obtenidos (float).
+        Media de los factores de dispersion obtenidos (float).
     Nota:
         Idealmente el retorno y el sparse_factor dado como argumento son
         muy parecidos.
@@ -131,7 +131,7 @@ def read_object(f_name, save_path='.'):
 
     Argumentos:
         f_name -- Nombre del fichero que contiene el objeto.
-        save_path -- Ruta al directorio donde está f_name.
+        save_path -- Ruta al directorio donde esta f_name.
     Retorno:
         Objeto cargado.
     """
@@ -147,7 +147,7 @@ def d_g_2_TGF(d_g, f_name):
 
     Argumentos:
         d_g -- Grafo representado como lista de adyacencias.
-        f_name -- Fichero en el que se volcará el grafo como TGF.
+        f_name -- Fichero en el que se volcara el grafo como TGF.
     """
     out = ''
     for v1 in d_g:
@@ -190,15 +190,18 @@ def dijkstra_d(d_g, u):
         u -- Nodo desde el que se inicia el algoritmo.
     Retorno:
         (a,b):
-            a -- Lista de distancias mínimas (a[i] distancia mínima de u a i).
-            b -- Lista de padres en caminos mínimos (a[i] padre de i).
+            a -- Lista de distancias minimas (a[i] distancia minima de u a i).
+            b -- Lista de padres en caminos minimos (a[i] padre de i).
     """
     dist = {}
     prev = {}
     visited = {}
     for ele in d_g:
         dist[ele] = np.inf
-        prev[ele] = -1
+        if ele != u:
+            prev[ele] = -1
+        else:
+            prev[ele] = -2
         visited[ele] = False
     q = PriorityQueue()
     dist[u] = 0
@@ -223,15 +226,18 @@ def dijkstra_m(m_g, u):
         u -- Nodo desde el que se inicia el algoritmo.
     Retorno:
         (a,b):
-            a -- Lista de distancias mínimas (a[i] distancia mínima de u a i).
-            b -- Lista de padres en caminos mínimos (a[i] padre de i).
+            a -- Lista de distancias minimas (a[i] distancia minima de u a i).
+            b -- Lista de padres en caminos minimos (a[i] padre de i).
     """
     dist = {}
     prev = {}
     visited = {}
     for ele in range(len(m_g)):
         dist[ele] = np.inf
-        prev[ele] = -1
+        if ele != u:
+            prev[ele] = -1
+        else:
+            prev[ele] = -2
         visited[ele] = False
     q = PriorityQueue()
     dist[u] = 0
@@ -249,7 +255,7 @@ def dijkstra_m(m_g, u):
 
 
 def min_path(d_prev, v):
-    """Recupera el camino mínimo hasta v dado el retorno de Dijkstra.
+    """Recupera el camino minimo hasta v dado el retorno de Dijkstra.
 
     Argumento:
         d_prev -- Lista de padres devuelta por Dijkstra.
@@ -258,7 +264,9 @@ def min_path(d_prev, v):
         Lista con el camino de u a v ([u x1 x2 ... xk v]) si existe.
         Si no hay camino devuelve [].
     """
-    if d_prev[v] < 0:
+    if d_prev[v] == -2:
+        return [v] # This is the first node of Dijks
+    elif d_prev[v] < 0:
         return []  # There is no path
     path = [v]
     while d_prev[v] >= 0:
@@ -269,12 +277,12 @@ def min_path(d_prev, v):
 
 
 def min_paths(d_prev):
-    """Devuelve un hash con todos los caminos mínimos encontrados en Dijkstra.
+    """Devuelve un hash con todos los caminos minimos encontrados en Dijkstra.
 
     Argumentos:
         d_prev -- Lista de padres devuelta por Dijkstra.
     Retorno:
-        Un hash que asocia a cada nodo su camino mínimo ({u: min_path(u)}).
+        Un hash que asocia a cada nodo su camino minimo ({u: min_path(u)}).
     """
     d_path = {}
     for ele in d_prev:
@@ -289,28 +297,32 @@ def time_dijkstra(n_graphs,
                   generate,
                   dijks,
                   sparse_factor=.25):
-    """Función que calcula los tiempos de ejecución de Dijkstra para varios tamaños.
+    """Funcion que calcula los tiempos de ejecucion de Dijkstra para varios tamaños.
 
     Argumentos:
         n_graphs -- Número de grafos a generar por cada tamaño.
         n_nodes_ini -- Primer tamaño de grafo utilizado.
         n_nodes_fin -- Último tamaño de grafo utilizado.
-        step -- Incremento del número de nodos en cada iteración.
-        generate -- Función que genera un grafo aleatorio dado el número de
-                    nodos y el factor de dispersión.
+        step -- Incremento del número de nodos en cada iteracion.
+        generate -- Funcion que genera un grafo aleatorio dado el número de
+                    nodos y el factor de dispersion.
         dijks -- Dijkstra a utilizar. Recibe el grafo generado 
                  y el nodo de partida.
-        sparse_factor -- Factor de dispersión de los grafos generados.
+        sparse_factor -- Factor de dispersion de los grafos generados.
     Retorno:
         Devuelva una lista de tiempos en segundos. El primer tiempo corresponde
         con el tiempo medio necesario para ejecutar Dijkstra desde todos los
-        nodos en un grafo de n_nodes_ini, el segundo corresponderá con un grafo 
-        de n_nodes_ini+step, así sucesivamente hasta n_nodes_fin.
+        nodos en un grafo de n_nodes_ini, el segundo correspondera con un grafo 
+        de n_nodes_ini+step, asi sucesivamente hasta n_nodes_fin.
     Nota:
         Los tiempos medios devueltos corresponden con el tiempo medio para
         ejecutar Dijkstra desde TODOS los nodos (NO desde un solo nodo).
-        Se toma esta decisión porque la función de fit_plot proporcionada
+        Se toma esta decision porque la funcion de fit_plot proporcionada
         busca ajustar una n^3*log(n).
+    Nota2:
+        Utilizamos el mismo codigo tanto para diccionarios, como para matrices
+        como para grafos de networkx, entonces los vertices tienen que ser nums
+        de entre 0 y numero de nodos  -1
     """
     times = []  # Returning list
     for nodes in range(n_nodes_ini, n_nodes_fin + 1, step):
@@ -323,7 +335,7 @@ def time_dijkstra(n_graphs,
             meanTime += (time() - time_ini)
         times.append(
             meanTime / n_graphs
-        )  # No dividimos por n_nodes porque la aproximación de fit_plot lo toma en cuenta
+        )  # No dividimos por n_nodes porque la aproximacion de fit_plot lo toma en cuenta
     return times
 
 
@@ -369,9 +381,9 @@ def time_dijkstra_d(n_graphs,
 ## FUNCIONES DEL CUADERNO AUXILIAR
 
 
-# La siguiente función la modificamos ligeramente para que aceptase algún caso
-# adicional, como el ajuste cambiando el factor de dispersión. También agregamos
-# algunos campos para configurar la gráfica.
+# La siguiente funcion la modificamos ligeramente para que aceptase algún caso
+# adicional, como el ajuste cambiando el factor de dispersion. Tambien agregamos
+# algunos campos para configurar la grafica.
 def fit_plot(l,
              func_2_fit,
              size_ini,
@@ -387,7 +399,7 @@ def fit_plot(l,
             i * func_2_fit(i) for i in range(size_ini, size_fin + 1, step)
         ]
     else:
-        # Para el fitting del rho que requiere de iteración con floats
+        # Para el fitting del rho que requiere de iteracion con floats
         # Nota: No  multiplicamos por el número de nodos porque en este caso es cte
         l_func_values = []
         x_vals = []
@@ -436,7 +448,7 @@ def print_d_g(d_g):
 
 
 def edges(d_g):
-    # Función auxiliar privada. Devuelve una lista de aristas de una grafo
+    # Funcion auxiliar privada. Devuelve una lista de aristas de una grafo
     # representado como matriz
     e = []
     for u in d_g:
@@ -451,7 +463,7 @@ def d_g_2_nx_g(d_g):
     Argumentos:
         d_g -- Grafo representado como lista de adyacencias.
     Retorno:
-        Grafo como objeto de librería de NetworkX.
+        Grafo como objeto de libreria de NetworkX.
     """
     g = nx.DiGraph()
     g.add_weighted_edges_from(edges(d_g))
@@ -471,6 +483,7 @@ def nx_g_2_d_g(nx_g):
         d_g[u] = {}
         for v in nx_g[u]:
             d_g[u][v] = nx_g[u][v]['weight']
+    return d_g
 
 
 def time_dijkstra_nx(n_graphs,
@@ -493,7 +506,7 @@ def time_dijkstra_nx(n_graphs,
         sparse_factor=sparse_factor)
 
 
-##### APÉNDICE
+##### APeNDICE
 
 
 def time_dijks_rho(rho_ini,
@@ -504,26 +517,26 @@ def time_dijks_rho(rho_ini,
                    n_nodes=100,
                    n_graphs=30,
                    for_all_nodes=True):
-    """Calcula tiempos de ejecución de Dijkstra iterando sobre el 
-    factor de dispersión.
+    """Calcula tiempos de ejecucion de Dijkstra iterando sobre el 
+    factor de dispersion.
 
     Argumentos:
-        rho_ini -- Factor de dispersión inicial.
-        rho_fin -- Factor de dispersión final.
-        step -- Incremento del factor de dispersión en cada iteración.
+        rho_ini -- Factor de dispersion inicial.
+        rho_fin -- Factor de dispersion final.
+        step -- Incremento del factor de dispersion en cada iteracion.
         dijks -- Algoritmo de Dijkstra a utilizar. Recibe el grafo y el nodo
                  inicial.
         generate -- Generador de grafos aleatorios. Recibe número de nodos y
-                    factor de dispersión.
+                    factor de dispersion.
         n_nodes -- Número fijo de nodos con los que se genera el grafo aleatorio.
-        n_graphs -- Número de grafos generados en cada iteración.
+        n_graphs -- Número de grafos generados en cada iteracion.
         for_all_nodes -- Si Dijkstra se ejecuta desde todos los nodos o solo desde
                          el inicial.
     Retorno:
-        Lista de tiempos medios correspondientes a cada factor de dispersión desde 
+        Lista de tiempos medios correspondientes a cada factor de dispersion desde 
         rho_ini a rho_fin (incluidos ambos) a pasos de step.
     Nota:
-        En caso de que for_all_nodes sea True entonces el tiempo de ejecución corresponde
+        En caso de que for_all_nodes sea True entonces el tiempo de ejecucion corresponde
         con el tiempo que tarda en ejecutar Dijkstra desde TODOS los nodos.
     """
     if for_all_nodes:
