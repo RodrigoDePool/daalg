@@ -424,6 +424,7 @@ def fit_plot(l,
         plt.xlabel(xlabel)
     if ylabel:
         plt.ylabel(ylabel)
+    plt.legend(loc=0)
 
 
 def n2_log_n(n):
@@ -566,7 +567,7 @@ def time_dijks_rho(rho_ini,
         for _ in range(n_graphs):
             g = generate(n_nodes, rho)
             time_ini = time()
-            for i in range(n_nodes):
+            for i in range(iters):
                 try:
                     dijks(g, i)
                 except:
