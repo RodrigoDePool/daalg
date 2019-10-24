@@ -106,7 +106,7 @@ def d_g_2_m_g(d_g):
     Retorno:
         Grafo representado como matriz de adyacencias.
     """
-    graph = np.array([np.array([np.inf for i in range(0, len(d_g))]) for j in range(0, len(d_g))])
+    graph = [[np.inf for i in range(0, len(d_g))] for j in range(0, len(d_g))]
     for v1 in d_g:
         for v2 in d_g[v1]:
             graph[v1][v2] = d_g[v1][v2]
@@ -576,3 +576,61 @@ def time_dijks_rho(rho_ini,
         times.append(mean_time / n_graphs)
         rho += step
     return times
+
+## PRACTICA 2
+
+def graph_2_multigraph(d_g):
+    outp = {}
+    for u in d_g:
+        outp[u] = {}
+        for v in d_g[u]:
+            outp[u][v] = {0:d_g[u][v]}
+    return outp
+
+def rand_weighted_multigraph(n_nodes,
+                             prob=0.2, 
+                             num_max_multiple_edges=1, 
+                             max_weight=50., 
+                             decimals=0, 
+                             fl_unweighted=False, 
+                             fl_diag=True):
+    mdg = {i:{j:{} for j in range(n_nodes)} for i in range(n_nodes)}
+    for u in range(n_nodes):
+        for v in range(n_nodes):
+            if v!=u or fl_diag: # Caso de ciclo
+                if random.random() <= prob:
+                    # Num de ramas uniforme entre 1 y num_max
+                    num_ramas=random.randint(1,num_max_multiple_edges)
+                    for i in range(num_ramas):
+                        if fl_unweighted:
+                            mdg[u][v][i] = np.random.randint(0,2)
+                        else:
+                            mdg[u][v][i] = np.round(np.random.random()*max_weight,
+                                                    decimals)
+    return mdg
+
+
+def rand_weighted_undirected_multigraph(n_nodes,
+                                        prob=0.2,
+                                        num_max_multiple_edges=1, 
+                                        max_weight=50., 
+                                        decimals=0, 
+                                        fl_unweighted=False, 
+                                        fl_diag=True):
+    mdg = {i:{j:{} for j in range(n_nodes)} for i in range(n_nodes)}
+    for u in range(n_nodes):
+        for v in range(u, n_nodes):
+            if v!=u or fl_diag: # Caso de ciclo
+                if random.random() <= prob:
+                    # Num de ramas uniforme entre 1 y num_max
+                    num_ramas=random.randint(1,num_max_multiple_edges)
+                    for i in range(num_ramas):
+                        if fl_unweighted:
+                            r = np.random.randint(0,2)
+                        else:
+                            r = np.round(np.random.random()*max_weight, 
+                                         decimals)
+                        mdg[u][v][i] = r
+                        mdg[v][u][i] = r                            
+    return mdg
+
