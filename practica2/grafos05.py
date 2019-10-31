@@ -28,8 +28,8 @@ def rand_matr_pos_graph(n_nodes, sparse_factor, max_weight=50, decimals=0):
     graph = np.array([np.array([np.inf for i in range(0, n_nodes)]) for j in range(0, n_nodes)])
     for i in range(0, n_nodes):
         for j in range(0, n_nodes):
-            if i != j and random.random() <= sparse_factor:
-                graph[i][j] = np.round(random.random()*max_weight,decimals)
+            if i != j and np.random.random() <= sparse_factor:
+                graph[i][j] = np.round(np.random.random()*max_weight,decimals)
     return graph
 
 
@@ -580,6 +580,8 @@ def time_dijks_rho(rho_ini,
 ## PRACTICA 2
 
 def graph_2_multigraph(d_g):
+    """TODO
+    """
     outp = {}
     for u in d_g:
         outp[u] = {}
@@ -594,13 +596,16 @@ def rand_weighted_multigraph(n_nodes,
                              decimals=0, 
                              fl_unweighted=False, 
                              fl_diag=True):
-    mdg = {i:{j:{} for j in range(n_nodes)} for i in range(n_nodes)}
+    """TODO
+    """
+    mdg = {u:{} for u in range(n_nodes)}
     for u in range(n_nodes):
         for v in range(n_nodes):
             if v!=u or fl_diag: # Caso de ciclo
-                if random.random() <= prob:
+                if np.random.random() <= prob:
+                    mdg[u][v] = {}
                     # Num de ramas uniforme entre 1 y num_max
-                    num_ramas=random.randint(1,num_max_multiple_edges)
+                    num_ramas= np.random.randint(1,num_max_multiple_edges+1)
                     for i in range(num_ramas):
                         if fl_unweighted:
                             mdg[u][v][i] = np.random.randint(0,2)
@@ -617,13 +622,17 @@ def rand_weighted_undirected_multigraph(n_nodes,
                                         decimals=0, 
                                         fl_unweighted=False, 
                                         fl_diag=True):
-    mdg = {i:{j:{} for j in range(n_nodes)} for i in range(n_nodes)}
+    """TODO
+    """
+    mdg = {u:{} for u in range(n_nodes)}
     for u in range(n_nodes):
         for v in range(u, n_nodes):
             if v!=u or fl_diag: # Caso de ciclo
-                if random.random() <= prob:
+                if np.random.random() <= prob:
+                    mdg[u][v] = {}
+                    mdg[v][u] = {}
                     # Num de ramas uniforme entre 1 y num_max
-                    num_ramas=random.randint(1,num_max_multiple_edges)
+                    num_ramas=np.random.randint(1,num_max_multiple_edges+1)
                     for i in range(num_ramas):
                         if fl_unweighted:
                             r = np.random.randint(0,2)
@@ -634,3 +643,76 @@ def rand_weighted_undirected_multigraph(n_nodes,
                         mdg[v][u][i] = r                            
     return mdg
 
+
+def o_a_tables(u, d_g, p, s, o, a, c):
+    """Modificación de BFS para calcular las tablas o y a
+    
+    Params:
+        u: Un vértice del grafo
+        d_g: Diccionario de un multigrafo en formato
+        p: Tabla de previos
+        s: Tabla de vistos
+        o: Tabla orden de paso
+        a: Tabla de orden de ascenso
+        c: Contador para actualizar la tabla de orden
+    """
+    s[u] = True
+    o[u] = c
+    a[u] = o[u]
+    c += 1
+    for v in d_g[u]:
+        if s[v] and p[u] != v:
+            a[u] = min(a[u], o[v])
+    for v in d_g[u]:
+        if not s[v]:
+            p[v] = u
+            c = o_a_tables(v,d_g,p,s,o,a,c)
+    for v in d_g[u]:
+        if p[v] == u:
+            a[u] = min(a[u], a[v])
+    
+    # Este código es más compacto y bonito pero no 
+    # es un copy-paste de las transparencias. Queremos los 10mil eurs.
+    #
+    # for v in d_g[u]:
+    #    if v != p[u]:
+    #        a[u] = min(a[u], o[v])
+    #    if not s[v]:
+    #        p[v] = u
+    #        c = o_a_tables(v,d_g,p,s,o,a,c)
+    #        a[u] = min(a[u], a[v])
+    return c
+
+def p_o_a_driver(d_g, u=0):
+    """TODO
+    """
+    p  = {u: None}
+    s = {i:False for i in d_g}
+    o = {i:np.inf for i in d_g}
+    a = {i:np.inf for i in d_g}
+    o_a_tables(u, d_g, p, s, o, a, 0)
+    return p,o,a
+
+def hijos_bp(u, p):
+    """TODO
+    """
+    return np.array([v for v in p if p[v]==u])
+
+def check_pda(p, o, a):
+    """TODO
+    """
+    if len(p) == len(o): 
+        # Hay solución
+        p_articulacion = []
+        for u in p:
+            hijos = hijos_bp(u,p)
+            if p[u]==None: # Raiz
+                if len(hijos)>1:
+                    p_articulacion.append(u)
+            else: # No raiz
+                if len(hijos)>0 and all(a[u]>=a[h] for h in hijos):
+                    p_articulacion.append(u)
+        return np.array(p_articulacion)
+    return None
+
+## TODO: ESTARIA BIEN PROBAR TODO LO DE LA SEGUNDA SEMANA
