@@ -710,7 +710,7 @@ def check_pda(p, o, a):
                 if len(hijos)>1:
                     p_articulacion.append(u)
             else: # No raiz
-                if len(hijos)>0 and any(a[u]>=a[h] for h in hijos):
+                if len(hijos)>0 and any(o[u]>=a[h] for h in hijos):
                     p_articulacion.append(u)
         return np.array(p_articulacion)
     return None
