@@ -670,17 +670,6 @@ def o_a_tables(u, d_g, p, s, o, a, c):
     for v in d_g[u]:
         if p[v] == u:
             a[u] = min(a[u], a[v])
-    
-    # Este código es más compacto y bonito pero no 
-    # es un copy-paste de las transparencias. Queremos los 10mil eurs.
-    #
-    # for v in d_g[u]:
-    #    if v != p[u]:
-    #        a[u] = min(a[u], o[v])
-    #    if not s[v]:
-    #        p[v] = u
-    #        c = o_a_tables(v,d_g,p,s,o,a,c)
-    #        a[u] = min(a[u], a[v])
     return c
 
 def p_o_a_driver(d_g, u=0):
@@ -715,4 +704,88 @@ def check_pda(p, o, a):
         return np.array(p_articulacion)
     return None
 
-## TODO: ESTARIA BIEN PROBAR TODO LO DE LA SEGUNDA SEMANA
+## TODO:NI LOS PA NI KRUSKAL FUNCIONA
+
+
+
+def time_pda(n_graphs, n_nodes_ini, n_nodes_fin, step, prob):
+    """ TODO
+    """
+    pass
+
+
+def init_cd(d_g):
+    """TODO
+    """
+    return {u:-1 for u in d_g}
+
+
+def union(rep_1, rep_2, d_cd):
+    """TODO
+    """
+    if d_cd[rep_2] < d_cd[rep_1]:
+        d_cd[rep_1]=rep_2
+        return rep_2
+    elif d_cd[rep_2] > d_cd[rep_1]:
+        d_cd[rep_2]=rep_1
+        return rep_1
+    else:
+        d_cd[rep_2]=rep_1
+        d_cd[rep_1]-= 1
+        return rep_1
+
+def find(ind, d_cd, fl_cc):
+    """TODO
+    """
+    #Buscamos el representante
+    rep = ind
+    while type(d_cd[rep]) is not int or d_cd[rep]>=0: 
+        # Los nodos pueden ser cualquier cosa menos enteros negativos
+        rep = d_cd[rep]
+
+    if fl_cc:
+        #Compresión de caminos
+        while type(d_cd[ind]) is not int or d_cd[ind]>=0: 
+            aux = d_cd[ind]
+            d_cd[ind] = rep
+            ind = aux
+    return rep
+
+def insert_pq(d_g, q):
+    """TODO
+    """
+    for u in d_g:
+        for v in d_g[u]:
+            if u < v:
+                for edge in d_g[u][v]:
+                    q.put((d_g[u][v][edge], u, v))
+
+def kruskal(d_g, fl_cc=True):
+    """TODO
+    """ 
+    cd = init_cd(d_g)
+    q = PriorityQueue()
+    insert_pq(d_g,q)
+    mintree = {u:{} for u in d_g}
+    num_ramas = 0
+    while not q.empty():
+        w, u, v = q.get()
+        repu, repv = find(u, cd, fl_cc), find(v, cd, fl_cc)
+        if repu!=repv:
+            union(repu, repv, cd)
+            mintree[repu][repv] = {0: w}
+            mintree[repv][repu] = {0: w}
+            num_ramas += 1
+    if num_ramas != len(d_g.keys())-1: # Si no es conexo
+        return None
+    return mintree
+
+
+def time_kruskal_2(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
+    """TODO
+    """
+    pass
+def time_kruskal(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
+    """TODO
+    """
+    pass
