@@ -25,11 +25,15 @@ def rand_matr_pos_graph(n_nodes, sparse_factor, max_weight=50, decimals=0):
     Retorno:
         Una matriz de adyacencias que representa al grafo generado.
     """
-    graph = np.array([np.array([np.inf for i in range(0, n_nodes)]) for j in range(0, n_nodes)])
+    graph = np.array([
+        np.array([np.inf for i in range(0, n_nodes)])
+        for j in range(0, n_nodes)
+    ])
     for i in range(0, n_nodes):
         for j in range(0, n_nodes):
             if i != j and np.random.random() <= sparse_factor:
-                graph[i][j] = np.round(np.random.random()*max_weight,decimals)
+                graph[i][j] = np.round(np.random.random() * max_weight,
+                                       decimals)
     return graph
 
 
@@ -577,7 +581,9 @@ def time_dijks_rho(rho_ini,
         rho += step
     return times
 
+
 ## PRACTICA 2
+
 
 def graph_2_multigraph(d_g):
     """TODO
@@ -586,61 +592,64 @@ def graph_2_multigraph(d_g):
     for u in d_g:
         outp[u] = {}
         for v in d_g[u]:
-            outp[u][v] = {0:d_g[u][v]}
+            outp[u][v] = {0: d_g[u][v]}
     return outp
 
+
 def rand_weighted_multigraph(n_nodes,
-                             prob=0.2, 
-                             num_max_multiple_edges=1, 
-                             max_weight=50., 
-                             decimals=0, 
-                             fl_unweighted=False, 
+                             prob=0.2,
+                             num_max_multiple_edges=1,
+                             max_weight=50.,
+                             decimals=0,
+                             fl_unweighted=False,
                              fl_diag=True):
     """TODO
     """
-    mdg = {u:{} for u in range(n_nodes)}
+    mdg = {u: {} for u in range(n_nodes)}
     for u in range(n_nodes):
         for v in range(n_nodes):
-            if v!=u or fl_diag: # Caso de ciclo
+            if v != u or fl_diag:  # Caso de ciclo
                 if np.random.random() <= prob:
                     mdg[u][v] = {}
                     # Num de ramas uniforme entre 1 y num_max
-                    num_ramas= np.random.randint(1,num_max_multiple_edges+1)
+                    num_ramas = np.random.randint(1,
+                                                  num_max_multiple_edges + 1)
                     for i in range(num_ramas):
                         if fl_unweighted:
-                            mdg[u][v][i] = np.random.randint(0,2)
+                            mdg[u][v][i] = np.random.randint(0, 2)
                         else:
-                            mdg[u][v][i] = np.round(np.random.random()*max_weight,
-                                                    decimals)
+                            mdg[u][v][i] = np.round(
+                                np.random.random() * max_weight, decimals)
     return mdg
 
 
 def rand_weighted_undirected_multigraph(n_nodes,
                                         prob=0.2,
-                                        num_max_multiple_edges=1, 
-                                        max_weight=50., 
-                                        decimals=0, 
-                                        fl_unweighted=False, 
+                                        num_max_multiple_edges=1,
+                                        max_weight=50.,
+                                        decimals=0,
+                                        fl_unweighted=False,
                                         fl_diag=True):
     """TODO
     """
-    mdg = {u:{} for u in range(n_nodes)}
+    mdg = {u: {} for u in range(n_nodes)}
     for u in range(n_nodes):
         for v in range(u, n_nodes):
-            if v!=u or fl_diag: # Caso de ciclo
+            if v != u or fl_diag:  # Caso de ciclo
                 if np.random.random() <= prob:
                     mdg[u][v] = {}
                     mdg[v][u] = {}
                     # Num de ramas uniforme entre 1 y num_max
-                    num_ramas=np.random.randint(1,num_max_multiple_edges+1)
+                    num_ramas = np.random.randint(1,
+                                                  num_max_multiple_edges + 1)
                     for i in range(num_ramas):
                         if fl_unweighted:
-                            r = np.random.randint(0,2)
+                            r = np.random.randint(0, 2)
                         else:
-                            r = np.round(np.random.random()*max_weight, 
+                            r = np.round(np.random.random() * max_weight,
                                          decimals)
                         mdg[u][v][i] = r
-                        mdg[v][u][i] = r                            
+                        mdg[v][u][i] = r
     return mdg
 
 
@@ -666,46 +675,49 @@ def o_a_tables(u, d_g, p, s, o, a, c):
     for v in d_g[u]:
         if not s[v]:
             p[v] = u
-            c = o_a_tables(v,d_g,p,s,o,a,c)
+            c = o_a_tables(v, d_g, p, s, o, a, c)
     for v in d_g[u]:
         if p[v] == u:
             a[u] = min(a[u], a[v])
     return c
 
+
 def p_o_a_driver(d_g, u=0):
     """TODO
     """
-    p  = {u: None}
-    s = {i:False for i in d_g}
-    o = {i:np.inf for i in d_g}
-    a = {i:np.inf for i in d_g}
+    p = {u: None}
+    s = {i: False for i in d_g}
+    o = {i: np.inf for i in d_g}
+    a = {i: np.inf for i in d_g}
     o_a_tables(u, d_g, p, s, o, a, 0)
-    return p,o,a
+    return p, o, a
+
 
 def hijos_bp(u, p):
     """TODO
     """
-    return np.array([v for v in p if p[v]==u])
+    return np.array([v for v in p if p[v] == u])
+
 
 def check_pda(p, o, a):
     """TODO
     """
-    if len(p) == len(o): 
+    if len(p) == len(o):
         # Hay solución
         p_articulacion = []
         for u in p:
-            hijos = hijos_bp(u,p)
-            if p[u]==None: # Raiz
-                if len(hijos)>1:
+            hijos = hijos_bp(u, p)
+            if p[u] == None:  # Raiz
+                if len(hijos) > 1:
                     p_articulacion.append(u)
-            else: # No raiz
-                if len(hijos)>0 and any(o[u]>=a[h] for h in hijos):
+            else:  # No raiz
+                if len(hijos) > 0 and any(o[u] <= a[h] for h in hijos):
                     p_articulacion.append(u)
         return np.array(p_articulacion)
     return None
 
-## TODO:NI LOS PA NI KRUSKAL FUNCIONA
 
+## TODO:NI LOS PA NI KRUSKAL FUNCIONA
 
 
 def time_pda(n_graphs, n_nodes_ini, n_nodes_fin, step, prob):
@@ -717,39 +729,41 @@ def time_pda(n_graphs, n_nodes_ini, n_nodes_fin, step, prob):
 def init_cd(d_g):
     """TODO
     """
-    return {u:-1 for u in d_g}
+    return {u: -1 for u in d_g}
 
 
 def union(rep_1, rep_2, d_cd):
     """TODO
     """
     if d_cd[rep_2] < d_cd[rep_1]:
-        d_cd[rep_1]=rep_2
+        d_cd[rep_1] = rep_2
         return rep_2
     elif d_cd[rep_2] > d_cd[rep_1]:
-        d_cd[rep_2]=rep_1
+        d_cd[rep_2] = rep_1
         return rep_1
     else:
-        d_cd[rep_2]=rep_1
-        d_cd[rep_1]-= 1
+        d_cd[rep_2] = rep_1
+        d_cd[rep_1] -= 1
         return rep_1
+
 
 def find(ind, d_cd, fl_cc):
     """TODO
     """
     #Buscamos el representante
     rep = ind
-    while type(d_cd[rep]) is not int or d_cd[rep]>=0: 
+    while type(d_cd[rep]) is not int or d_cd[rep] >= 0:
         # Los nodos pueden ser cualquier cosa menos enteros negativos
         rep = d_cd[rep]
 
     if fl_cc:
         #Compresión de caminos
-        while type(d_cd[ind]) is not int or d_cd[ind]>=0: 
+        while type(d_cd[ind]) is not int or d_cd[ind] >= 0:
             aux = d_cd[ind]
             d_cd[ind] = rep
             ind = aux
     return rep
+
 
 def insert_pq(d_g, q):
     """TODO
@@ -760,23 +774,24 @@ def insert_pq(d_g, q):
                 for edge in d_g[u][v]:
                     q.put((d_g[u][v][edge], u, v))
 
+
 def kruskal(d_g, fl_cc=True):
     """TODO
-    """ 
+    """
     cd = init_cd(d_g)
     q = PriorityQueue()
-    insert_pq(d_g,q)
-    mintree = {u:{} for u in d_g}
+    insert_pq(d_g, q)
+    mintree = {u: {} for u in d_g}
     num_ramas = 0
     while not q.empty():
         w, u, v = q.get()
         repu, repv = find(u, cd, fl_cc), find(v, cd, fl_cc)
-        if repu!=repv:
+        if repu != repv:
             union(repu, repv, cd)
-            mintree[repu][repv] = {0: w}
-            mintree[repv][repu] = {0: w}
+            mintree[u][v] = {0: w}
+            mintree[v][u] = {0: w}
             num_ramas += 1
-    if num_ramas != len(d_g.keys())-1: # Si no es conexo
+    if num_ramas != len(d_g) - 1:  # Si no es conexo
         return None
     return mintree
 
@@ -785,6 +800,8 @@ def time_kruskal_2(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
     """TODO
     """
     pass
+
+
 def time_kruskal(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
     """TODO
     """
