@@ -717,9 +717,6 @@ def check_pda(p, o, a):
     return None
 
 
-## TODO:NI LOS PA NI KRUSKAL FUNCIONA
-
-
 def time_pda(n_graphs, n_nodes_ini, n_nodes_fin, step, prob):
     """ TODO
     """
@@ -806,3 +803,10 @@ def time_kruskal(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
     """TODO
     """
     pass
+
+
+#TODO: FALTA
+#  1. LAS FUNCIONES DE TIEMPOS DE TODA LA PRÁCTICA
+#  2. TODOS LOS COMENTARIOS DE LAS FUNCIONES
+#  3. HACER LA MEMORIA
+#  4. REVISAR TODO s EN EL FICHEROS

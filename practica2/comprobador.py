@@ -210,6 +210,8 @@ def comprobar_kruskal():
 
 
 # CORREMOS LOS TESTS
+print("\n")
 comprobar_puntos_de_articulacion()
-print("\n\n\n")
+print("\n")
 comprobar_kruskal()
+print("\n")
