@@ -582,6 +582,9 @@ def time_dijks_rho(rho_ini,
     return times
 
 
+def print_d_mg(g):
+    print(g)
+
 ## PRACTICA 2
 
 
@@ -720,7 +723,23 @@ def check_pda(p, o, a):
 def time_pda(n_graphs, n_nodes_ini, n_nodes_fin, step, prob):
     """ TODO
     """
-    pass
+    meanTimes = [0 for _ in range(n_nodes_ini, n_nodes_fin+1, step)]
+    i = 0
+    for nodes in range(n_nodes_ini, n_nodes_fin+1, step):
+        counter = 0
+        for _ in range(n_graphs):
+            g = rand_weighted_undirected_multigraph(nodes,prob)
+            t_ini = time()
+            pas = check_pda(*p_o_a_driver(g,0))
+            if pas is not None:
+                meanTimes[i] += (time()-t_ini)
+                counter+=1
+        if counter==0:
+            return []
+        meanTimes[i] /= counter
+        i+=1
+    return meanTimes
+
 
 
 def init_cd(d_g):
@@ -793,16 +812,69 @@ def kruskal(d_g, fl_cc=True):
     return mintree
 
 
+
+def kruskal2(d_g, fl_cc=True):
+    """TODO
+    """
+    cd = init_cd(d_g)
+    q = PriorityQueue()
+    insert_pq(d_g, q)
+    mintree = {u: {} for u in d_g}
+    num_ramas = 0
+    t_ini = time()
+    while not q.empty():
+        w, u, v = q.get()
+        repu, repv = find(u, cd, fl_cc), find(v, cd, fl_cc)
+        if repu != repv:
+            union(repu, repv, cd)
+            mintree[u][v] = {0: w}
+            mintree[v][u] = {0: w}
+            num_ramas += 1
+    t = time()-t_ini
+    if num_ramas != len(d_g) - 1:  # Si no es conexo
+        return None, -1
+    return mintree, t
+
 def time_kruskal_2(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
     """TODO
     """
-    pass
+    meanTimes = [0 for _ in range(n_nodes_ini, n_nodes_fin+1, step)]
+    i = 0
+    for nodes in range(n_nodes_ini, n_nodes_fin+1, step):
+        counter = 0
+        for _ in range(n_graphs):
+            g = rand_weighted_undirected_multigraph(nodes,prob)
+            mst, t = kruskal2(g,fl_cc)
+            if mst is not None:
+                meanTimes[i] += t
+                counter+=1
+        if counter==0:
+            return []
+        meanTimes[i] /= counter
+        i+=1
+    return meanTimes    
+
 
 
 def time_kruskal(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
     """TODO
     """
-    pass
+    meanTimes = [0 for _ in range(n_nodes_ini, n_nodes_fin+1, step)]
+    i = 0
+    for nodes in range(n_nodes_ini, n_nodes_fin+1, step):
+        counter = 0
+        for _ in range(n_graphs):
+            g = rand_weighted_undirected_multigraph(nodes,prob)
+            t_ini = time()
+            mst = kruskal(g,fl_cc)
+            if mst is not None:
+                meanTimes[i] += (time()-t_ini)
+                counter+=1
+        if counter==0:
+            return []
+        meanTimes[i] /= counter
+        i+=1
+    return meanTimes
 
 
 #TODO: FALTA
