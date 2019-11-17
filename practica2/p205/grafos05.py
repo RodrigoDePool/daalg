@@ -1,6 +1,6 @@
 import sys
 import time
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import random
 import numpy as np
 import pickle
@@ -420,15 +420,15 @@ def fit_plot(l,
     lr_m.fit(X, l)
     y_pred = lr_m.predict(X)
 
-    if label:
-        plt.plot(x_vals, l, '*', x_vals, y_pred, '-', label=label)
-    else:
-        plt.plot(x_vals, l, '*', x_vals, y_pred, '-', label=label)
-    if xlabel:
-        plt.xlabel(xlabel)
-    if ylabel:
-        plt.ylabel(ylabel)
-    plt.legend(loc=0)
+    #if label:
+    #    plt.plot(x_vals, l, '*', x_vals, y_pred, '-', label=label)
+    #else:
+    #    plt.plot(x_vals, l, '*', x_vals, y_pred, '-', label=label)
+    #if xlabel:
+    #    plt.xlabel(xlabel)
+    #if ylabel:
+    #    plt.ylabel(ylabel)
+    #plt.legend(loc=0)
 
 
 def n2_log_n(n):
@@ -585,17 +585,24 @@ def time_dijks_rho(rho_ini,
 def print_d_mg(g):
     print(g)
 
+
 ## PRACTICA 2
 
 
-def graph_2_multigraph(d_g):
-    """TODO
+def graph_2_multigraph(d_mg):
+    """Recibe un grafo como lista de adyacencias y devuelve un multigrafo
+    
+    Argumentos:
+        d_mg ({int:{int:int}}) -- Lista de adyacencias de un grafo
+    Retorno:
+        Retorna las listas de adyacencias del multigrafo resultante 
+        ({int:{int:{int:int}}})
     """
     outp = {}
-    for u in d_g:
+    for u in d_mg:
         outp[u] = {}
-        for v in d_g[u]:
-            outp[u][v] = {0: d_g[u][v]}
+        for v in d_mg[u]:
+            outp[u][v] = {0: d_mg[u][v]}
     return outp
 
 
@@ -606,7 +613,19 @@ def rand_weighted_multigraph(n_nodes,
                              decimals=0,
                              fl_unweighted=False,
                              fl_diag=True):
-    """TODO
+    """Genera un multigrafo aleatorio dirigido
+
+    Argumentos:
+        n_nodes (int) -- Número de nodos del multigrafo
+        prob (float) -- Factor de dispersión (entre 0 y 1)
+        num_max_multiple_edges (int) -- Número máximo de ramas entre dos nodos
+        max_weight (float) -- Peso  máximo de una arista
+        decimals (int) -- Número de decimales de los pesos de cada rama
+        fl_unweighted (bool) -- False si el grafo es ponderado, True si no lo es
+        fl_dia (bool) -- False si no se permiten aristas ciclos, True si se permiten
+    Retorno:
+        Retorna las listas de adyacencias del multigrafo resultante 
+        ({int:{int:{int:int}}})
     """
     mdg = {u: {} for u in range(n_nodes)}
     for u in range(n_nodes):
@@ -633,7 +652,19 @@ def rand_weighted_undirected_multigraph(n_nodes,
                                         decimals=0,
                                         fl_unweighted=False,
                                         fl_diag=True):
-    """TODO
+    """Genera un multigrafo aleatorio dirigido
+
+    Argumentos:
+        n_nodes (int) -- Número de nodos del multigrafo
+        prob (float) -- Factor de dispersión (entre 0 y 1)
+        num_max_multiple_edges (int) -- Número máximo de ramas entre dos nodos
+        max_weight (float) -- Peso  máximo de una arista
+        decimals (int) -- Número de decimales de los pesos de cada rama
+        fl_unweighted (bool) -- False si el grafo es ponderado, True si no lo es
+        fl_dia (bool) -- False si no se permiten aristas ciclos, True si se permiten
+    Retorno:
+        Retorna las listas de adyacencias del multigrafo resultante 
+        ({int:{int:{int:int}}})
     """
     mdg = {u: {} for u in range(n_nodes)}
     for u in range(n_nodes):
@@ -656,54 +687,80 @@ def rand_weighted_undirected_multigraph(n_nodes,
     return mdg
 
 
-def o_a_tables(u, d_g, p, s, o, a, c):
-    """Modificación de BFS para calcular las tablas o y a
+def o_a_tables(u, d_mg, p, s, o, a, c):
+    """Modificación de DFS para calcular las tablas o y a
     
-    Params:
-        u: Un vértice del grafo
-        d_g: Diccionario de un multigrafo en formato
-        p: Tabla de previos
-        s: Tabla de vistos
-        o: Tabla orden de paso
-        a: Tabla de orden de ascenso
-        c: Contador para actualizar la tabla de orden
+    Argumentos:
+        u -- Un vértice del grafo
+        d_mg -- Diccionario de un multigrafo en formato
+        p ({nodo:nodo}) -- Tabla de previos
+        s ({nodo:bool}) -- Tabla de vistos
+        o ({nodo:int}) -- Tabla orden de paso
+        a ({nodo:int}) -- Tabla de orden de ascenso
+        c (int) -- Contador para actualizar la tabla de orden
+    Retorno:
+        Devuelve el contador de la tabla de orden (int)
     """
     s[u] = True
     o[u] = c
     a[u] = o[u]
     c += 1
-    for v in d_g[u]:
+    for v in d_mg[u]:
         if s[v] and p[u] != v:
             a[u] = min(a[u], o[v])
-    for v in d_g[u]:
+    for v in d_mg[u]:
         if not s[v]:
             p[v] = u
-            c = o_a_tables(v, d_g, p, s, o, a, c)
-    for v in d_g[u]:
+            c = o_a_tables(v, d_mg, p, s, o, a, c)
+    for v in d_mg[u]:
         if p[v] == u:
             a[u] = min(a[u], a[v])
     return c
 
 
-def p_o_a_driver(d_g, u=0):
-    """TODO
+def p_o_a_driver(d_mg, u=0):
+    """Calcula las tabla P, O y A de un multigrafo
+
+    Argumentos:
+        d_mg -- Lista de adyacencias de multigrafo
+        u -- Nodo inicial desde el cual iniciar el árbol de DFS
+    Retorno:
+        Devuelve tres diccionarios:
+            p ({nodo:nodo}) -- Dict de padres del árbol DFS
+            o ({nodo:int}) -- Órden de descubrimiento del árbol
+            a ({nodo:int}) -- Órden de ascenso de cada nodo
     """
     p = {u: None}
-    s = {i: False for i in d_g}
-    o = {i: np.inf for i in d_g}
-    a = {i: np.inf for i in d_g}
-    o_a_tables(u, d_g, p, s, o, a, 0)
+    s = {i: False for i in d_mg}
+    o = {i: np.inf for i in d_mg}
+    a = {i: np.inf for i in d_mg}
+    o_a_tables(u, d_mg, p, s, o, a, 0)
     return p, o, a
 
 
 def hijos_bp(u, p):
-    """TODO
+    """Calcula los hijos de un nodo en un árbol DFS
+
+    Argumentos:
+        u -- Nodo del que se quieren saber sus hijos
+        p -- Diccionario de padres del árbol DFS
+    Returno:
+        Un array con los hijos del nodo en el árbol
     """
     return np.array([v for v in p if p[v] == u])
 
 
 def check_pda(p, o, a):
-    """TODO
+    """Devuelve los puntos de articulación de un multigrafo
+
+    Argumentos:
+        p ({nodo:nodo}) -- Dict de padres del árbol DFS
+        o ({nodo:int}) -- Órden de descubrimiento del árbol
+        a ({nodo:int}) -- Órden de ascenso de cada nodo
+    Retorno:
+        Si el grafo no es conexo devuelve None.
+        Si el grafo es conexo entonces devuelve una lista
+        con los puntos de articulación.
     """
     if len(p) == len(o):
         # Hay solución
@@ -721,35 +778,59 @@ def check_pda(p, o, a):
 
 
 def time_pda(n_graphs, n_nodes_ini, n_nodes_fin, step, prob):
-    """ TODO
+    """ Calcula los tiempos de ejecución del cómputo de las tablas P, O y A.
+
+    Argumentos:
+        n_graphs (int) -- Número de grafos a generar por cada tamaño
+        n_nodes_ini (int) -- Tamaño inicial (de nodos) del grafo
+        n_nodes_fin (int) -- Tamaño final (de nodos) del grafo
+        step (int) -- Salto de tamaños entre pruebas
+        prob (float) -- Factor de dispersión.
+    Retorno:
+        Devuelve un array con los tiempos medios de ejecución por cada tamaño 
+        de grafo. SOLO se toman en cuenta los tiempos de ejecución de los grafos
+        conexos.
+        Si para alguno de los tamaños pasa que todos los grafos son no conexos
+        entonces la función devuelve una lista vacía.
     """
-    meanTimes = [0 for _ in range(n_nodes_ini, n_nodes_fin+1, step)]
+    meanTimes = [0 for _ in range(n_nodes_ini, n_nodes_fin + 1, step)]
     i = 0
-    for nodes in range(n_nodes_ini, n_nodes_fin+1, step):
+    for nodes in range(n_nodes_ini, n_nodes_fin + 1, step):
         counter = 0
         for _ in range(n_graphs):
-            g = rand_weighted_undirected_multigraph(nodes,prob)
+            g = rand_weighted_undirected_multigraph(nodes, prob)
             t_ini = time()
-            pas = check_pda(*p_o_a_driver(g,0))
-            if pas is not None:
-                meanTimes[i] += (time()-t_ini)
-                counter+=1
-        if counter==0:
+            p, o, a = p_o_a_driver(g, 0)
+            if len(p) == len(o):  # Si es conexo
+                meanTimes[i] += (time() - t_ini)
+                counter += 1
+        if counter == 0:
             return []
         meanTimes[i] /= counter
-        i+=1
+        i += 1
     return meanTimes
 
 
-
 def init_cd(d_g):
-    """TODO
+    """Iniciamos la estructura de conjuntos disjuntos
+
+    Argumentos:
+        d_g -- Lista de adyacencias de un multigrafo/grafo
+    Retorno:
+        Devuelve la estructura cd incializada
     """
     return {u: -1 for u in d_g}
 
 
 def union(rep_1, rep_2, d_cd):
-    """TODO
+    """Une dos conjuntos de la estructura CD.
+
+    Argumentos:
+        rep_1 -- Representante de un conjunto 
+        rep_2 -- Representante de otro conjunto
+        d_cd -- Estructura de conjunto disjunto
+    Retorno:
+        El representante resultante de unir ambos conjuntos.
     """
     if d_cd[rep_2] < d_cd[rep_1]:
         d_cd[rep_1] = rep_2
@@ -764,7 +845,14 @@ def union(rep_1, rep_2, d_cd):
 
 
 def find(ind, d_cd, fl_cc):
-    """TODO
+    """Encuentra el representante de un elemento en una estructura de CD.
+
+    Argumento:
+        ind -- Elemento del que se quiere buscar su representante
+        d_cd -- Estructura de conjunto disjunto
+        fl_cc (bool) -- Si debería, o no, realizar compresión de caminos.
+    Retorno:
+        Devuelve el representante del conjunto al que pertenece ind en el CD.
     """
     #Buscamos el representante
     rep = ind
@@ -781,18 +869,31 @@ def find(ind, d_cd, fl_cc):
     return rep
 
 
-def insert_pq(d_g, q):
-    """TODO
+def insert_pq(d_mg, q):
+    """Inserta todas las ramas de un multigrafo no dirigido.
+
+    Argumentos:
+        d_mg -- Lista de adyacencia de multigrafo NO dirigido
+        q -- Cola en la que se insertarán las ramas
+    Nota:
+        - Cada rama del multigrafo no dirigido se introduce en un solo sentido
+        - No se introducen los ciclos (no son útiles para Kruskal)
     """
-    for u in d_g:
-        for v in d_g[u]:
+    for u in d_mg:
+        for v in d_mg[u]:
             if u < v:
-                for edge in d_g[u][v]:
-                    q.put((d_g[u][v][edge], u, v))
+                for edge in d_mg[u][v]:
+                    q.put((d_mg[u][v][edge], u, v))
 
 
 def kruskal(d_g, fl_cc=True):
-    """TODO
+    """Devuelve el árbol abarcador mínimo calculado con Kruskal
+
+    Argumentos:
+        d_g -- Lista de adyacencias del multigrafo no dirigido.
+        fl_cc -- Si deberíamos utilizar, o no, compresión de caminos en el CD.
+    Retorno:
+        Devuelve un multigrafo con el MST, o None si el grafo no es conexo.
     """
     cd = init_cd(d_g)
     q = PriorityQueue()
@@ -812,76 +913,108 @@ def kruskal(d_g, fl_cc=True):
     return mintree
 
 
-
 def kruskal2(d_g, fl_cc=True):
-    """TODO
+    """Devuelve el árbol abarcador mínimo calculado con Kruskal
+    Además, devuelve el tiempo de ejecución del algoritmo 
+    (sin contar la gestión de la cola de prioridad)
+
+    Argumentos:
+        d_g -- Lista de adyacencias del multigrafo no dirigido.
+        fl_cc -- Si deberíamos utilizar, o no, compresión de caminos en el CD.
+    Retorno:
+        Si el grafo es conexo:
+            MST -- Multigrafo con el MST
+            t -- Tiempo de ejecución del algoritmo sin la inserción inicial a la cola
+        Si el grafo no es conexo:
+            None
+            -1
     """
     cd = init_cd(d_g)
     q = PriorityQueue()
     insert_pq(d_g, q)
     mintree = {u: {} for u in d_g}
     num_ramas = 0
-    t_ini = time()
+    ttime = 0
     while not q.empty():
         w, u, v = q.get()
+        t_ini = time()
         repu, repv = find(u, cd, fl_cc), find(v, cd, fl_cc)
         if repu != repv:
             union(repu, repv, cd)
             mintree[u][v] = {0: w}
             mintree[v][u] = {0: w}
             num_ramas += 1
-    t = time()-t_ini
+        ttime += (time() - t_ini)
     if num_ramas != len(d_g) - 1:  # Si no es conexo
         return None, -1
-    return mintree, t
+    return mintree, ttime
+
 
 def time_kruskal_2(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
-    """TODO
+    """ Calcula los tiempos de ejecución de Kruskal,
+    sin tener en cuenta el tiempo de inserción inicial en la cola de prioridad.
+
+    Argumentos:
+        n_graphs (int) -- Número de grafos a generar por cada tamaño
+        n_nodes_ini (int) -- Tamaño inicial (de nodos) del grafo
+        n_nodes_fin (int) -- Tamaño final (de nodos) del grafo
+        step (int) -- Salto de tamaños entre pruebas
+        prob (float) -- Factor de dispersión.
+        fl_cc (bool) -- Si se utiliza, o no, compresión de caminos en el CD.
+    Retorno:
+        Devuelve un array con los tiempos medios de ejecución por cada tamaño 
+        de grafo. SOLO se toman en cuenta los tiempos de ejecución de los grafos
+        conexos.
+        Si para alguno de los tamaños pasa que todos los grafos son no conexos
+        entonces la función devuelve una lista vacía.
     """
-    meanTimes = [0 for _ in range(n_nodes_ini, n_nodes_fin+1, step)]
+    meanTimes = [0 for _ in range(n_nodes_ini, n_nodes_fin + 1, step)]
     i = 0
-    for nodes in range(n_nodes_ini, n_nodes_fin+1, step):
+    for nodes in range(n_nodes_ini, n_nodes_fin + 1, step):
         counter = 0
         for _ in range(n_graphs):
-            g = rand_weighted_undirected_multigraph(nodes,prob)
-            mst, t = kruskal2(g,fl_cc)
+            g = rand_weighted_undirected_multigraph(nodes, prob)
+            mst, t = kruskal2(g, fl_cc)
             if mst is not None:
                 meanTimes[i] += t
-                counter+=1
-        if counter==0:
+                counter += 1
+        if counter == 0:
             return []
         meanTimes[i] /= counter
-        i+=1
-    return meanTimes    
-
-
-
-def time_kruskal(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
-    """TODO
-    """
-    meanTimes = [0 for _ in range(n_nodes_ini, n_nodes_fin+1, step)]
-    i = 0
-    for nodes in range(n_nodes_ini, n_nodes_fin+1, step):
-        counter = 0
-        for _ in range(n_graphs):
-            g = rand_weighted_undirected_multigraph(nodes,prob)
-            t_ini = time()
-            mst = kruskal(g,fl_cc)
-            if mst is not None:
-                meanTimes[i] += (time()-t_ini)
-                counter+=1
-        if counter==0:
-            return []
-        meanTimes[i] /= counter
-        i+=1
+        i += 1
     return meanTimes
 
 
-#TODO: FALTA
-#  1. LAS FUNCIONES DE TIEMPOS DE TODA LA PRÁCTICA
-#  2. TODOS LOS COMENTARIOS DE LAS FUNCIONES
-#  3. HACER LA MEMORIA
-#  4. REVISAR TODO s EN EL FICHEROS
-#  5. REVISAR QUE TENGAS TODAS LAS FUNCIONES DEL CHECK_PRACT
-#  6. ASEGURARSE DE QUE SE PUEDA EJECUTAR BIEN EN UNA TERMINAL SOLA
-#  7. ASEGURARSE DE TENER TODAS LAS FUNCIONES DEL ENUNCIADOS
+def time_kruskal(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
+    """ Calcula los tiempos de ejecución de Kruskal.
+
+    Argumentos:
+        n_graphs (int) -- Número de grafos a generar por cada tamaño
+        n_nodes_ini (int) -- Tamaño inicial (de nodos) del grafo
+        n_nodes_fin (int) -- Tamaño final (de nodos) del grafo
+        step (int) -- Salto de tamaños entre pruebas
+        prob (float) -- Factor de dispersión.
+        fl_cc (bool) -- Si se utiliza, o no, compresión de caminos en el CD.
+    Retorno:
+        Devuelve un array con los tiempos medios de ejecución por cada tamaño 
+        de grafo. SOLO se toman en cuenta los tiempos de ejecución de los grafos
+        conexos.
+        Si para alguno de los tamaños pasa que todos los grafos son no conexos
+        entonces la función devuelve una lista vacía.
+    """
+    meanTimes = [0 for _ in range(n_nodes_ini, n_nodes_fin + 1, step)]
+    i = 0
+    for nodes in range(n_nodes_ini, n_nodes_fin + 1, step):
+        counter = 0
+        for _ in range(n_graphs):
+            g = rand_weighted_undirected_multigraph(nodes, prob)
+            t_ini = time()
+            mst = kruskal(g, fl_cc)
+            if mst is not None:
+                meanTimes[i] += (time() - t_ini)
+                counter += 1
+        if counter == 0:
+            return []
+        meanTimes[i] /= counter
+        i += 1
+    return meanTimes
