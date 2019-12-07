@@ -1142,6 +1142,7 @@ def min_coin_change_matrix(c:int, l_coins):
     """TODO
     """
     assert (c>=0 and all(x>0 for x in l_coins) and (1 in l_coins))
+    l_coins = sorted(l_coins)
     dp = [[-1 for _ in range(c+1)] for __ in range(len(l_coins))] 
     # Condiciones frontera
     for i in range( c+1):
@@ -1199,22 +1200,56 @@ def max_length_common_subsequence(str_1:str, str_2: str):
     return dp[l1][l2]
 
 
-def find_max_common_subsequence(str_1, str_2):
+def find_max_common_subsequence(str_1:str, str_2:str):
     """TODO
     """
-    dp = max_length_common_subsequence(str_1,str_2)
+    dp = max_common_subsequence_problem(str_1,str_2)
     l1, l2 = len(str_1), len(str_2)
     subseq = ''
     while l1>0 and l2>0:
-        if dp[l1][l2] == 1+ dp[l1-1][l2-1]:
+        
+        if dp[l1][l2] == dp[l1][l2-1]:
+            l2-=1
+        elif dp[l1][l2] == dp[l1-1][l2]:
+            l1-=1
+        elif dp[l1][l2] == 1 + dp[l1-1][l2-1]:
             subseq = str_1[l1-1]+subseq
             l1 -=1
             l2-=1
-        elif dp[l1][l2] == dp[l1][l2-1]:
-            l2-=1
-        else:
-            l1-=1
     return subseq
+
+
+# TODO PRBAR ESTO Y COINCHANGE
+def optimal_order(l_probs):
+    """TODO
+    """
+    l = len(l_probs)
+    dp = [[0 for __ in range(l)] for _ in range(l)]
+    for i in range(l):
+        dp[i][i] = l_probs[i]
+    for n in range(1, l):
+        for left in range(l):
+            if left+n < l:
+                minv = float('inf')
+                s = 0
+                right = left+n
+                for  middle in range(left, right+1):
+                    s += dp[middle][middle]
+                    if middle-1<left:
+                        aux = 0+dp[middle+1][right]
+                    elif middle+1>right:
+                        aux = dp[left][middle-1]+0
+                    else:
+                        aux = dp[left][middle-1]+dp[middle+1][right]
+                    minv = min(minv, aux)
+                dp[left][right] = s + aux
+    return dp                                
+
+#TODO TERMINAR ESTO
+def list_opt_ordering_search_tree(m_roots, l, r):
+    """TODO
+    """
+    pass
 ## TODOOOOO TERMINARRRR 
 
 # TODO: PREGUNTAS DE LA VIDA
