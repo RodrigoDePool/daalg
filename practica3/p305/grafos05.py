@@ -1052,7 +1052,7 @@ def mcd(x:int, y:int):
 def multiplier(mod: int , mult_ini:int ):
     """TODO
     """
-    assert mod>mult_ini "El multiplicador tiene que ser menor que el mod"
+    assert mod>mult_ini, "El multiplicador tiene que ser menor que el mod"
     p = random.randint(mult_ini, mod)
     while mcd(mod,p)!=1:
         p = random.randint(mult_ini, mod)
@@ -1061,7 +1061,7 @@ def multiplier(mod: int , mult_ini:int ):
 def inverse(p:int, mod:int):
     """TODO
     """
-    assert mod>p "El valor tiene que ser menor que el módulo"
+    assert mod>p, "El valor tiene que ser menor que el módulo"
     for q in range(1,mod):
         if (p*q)%mod == 1:
             return q
@@ -1095,7 +1095,7 @@ def mh_encrypt(l_bits, l_pub, mod:int):
     """TODO
     """
     if len(l_bits)%len(l_pub)!=0: # Rellenamos con ceros
-        l_bits += [0]*(len(l_pub)- len(l_bits)%len(l_pub))
+        l_bits = l_bits +  [0]*(len(l_pub)- len(l_bits)%len(l_pub))
     
     encrypted = []
     i_bits = 0
@@ -1103,11 +1103,10 @@ def mh_encrypt(l_bits, l_pub, mod:int):
         # Ciframos un bloque
         e = 0
         for _ in range(len(l_pub)):
-            if l_bits[i_bits] == 1:
-                e += l_pub[i_bits%len(l_pub)]
+            e += l_pub[i_bits%len(l_pub)]*l_bits[i_bits]
             i_bits += 1
         encrypted.append(e)
-    return e
+    return encrypted
 
 def mh_block_decrypt(c:int, l_sc, inv:int, mod:int):
     """TODO
@@ -1117,14 +1116,15 @@ def mh_block_decrypt(c:int, l_sc, inv:int, mod:int):
     for i in range(len(l_sc)-1, -1, -1):
         if c == 0:
             bits.append(0)
-        elif l_sc < c:
+        elif l_sc[i] < c:
             bits.append(1)
-            c -= l_sc
-        elif l_sc > c:
+            c -= l_sc[i]
+        elif l_sc[i] > c:
             bits.append(0)
         else:
             bits.append(1)
             c = 0
+    bits.reverse()
     return bits
 
 def mh_decrypt(l_cifra, l_sc, inv:int , mod:int):
@@ -1137,11 +1137,12 @@ def mh_decrypt(l_cifra, l_sc, inv:int , mod:int):
 
 # TODO FALTA PROBAR TODO ESTE CODIGOOOOO
 # USO ASSERTS MÁS ESTRICTOS???
-
-def min_coin_number(c:int, l_coins):
+#TODO: PROBAR A PARTIR DE AQUÍ (creo que coin funciona)
+def min_coin_change_matrix(c:int, l_coins):
     """TODO
     """
-    dp = [[None]*(c+1)]*len(l_coins) 
+    assert (c>=0 and all(x>0 for x in l_coins) and (1 in l_coins))
+    dp = [[-1 for _ in range(c+1)] for __ in range(len(l_coins))] 
     # Condiciones frontera
     for i in range( c+1):
         dp[0][i] = i # La primera moneda es siempre 1
@@ -1154,4 +1155,68 @@ def min_coin_number(c:int, l_coins):
                 dp[i][v] = min(dp[i-1][v], 1+dp[i][v-l_coins[i]])
             else:
                 dp[i][v] = dp[i-1][v]
+    return dp
+
+def min_coin_number(c:int, l_coins):
+    """TODO
+    """
+    dp = min_coin_change_matrix(c, l_coins)
+    return dp[len(l_coins)-1][c]
+
+
+def optimal_change(c:int, l_coins):
+    """TODO
+    """
+    dp = min_coin_change_matrix(c, l_coins)
+    change = {x:0 for x in l_coins}
+    u,v = len(l_coins)-1 , c
+    while u>=0 and v>0:
+        if u>0 and dp[u][v] == dp[u-1][v]:
+            u = u-1
+        else:
+            v = v - l_coins[u]
+            change[l_coins[u]] += 1
+    return change
+
+def max_common_subsequence_problem(str_1:str, str_2: str):
+    """TODO
+    """
+    l1, l2 = len(str_1), len(str_2)
+    dp = [[0 for __ in range(l2+1)] for _ in range(l1+1)]
+    for i in range(1,l1+1):
+        for j in range(1,l2+1):
+            if str_1[i-1] == str_2[j-1]:
+                dp[i][j] = 1 + dp[i-1][j-1]
+            else:
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+    return dp
+
+def max_length_common_subsequence(str_1:str, str_2: str):
+    """TODO
+    """
+    l1, l2 = len(str_1), len(str_2)
+    dp = max_common_subsequence_problem(str_1,str_2)
+    return dp[l1][l2]
+
+
+def find_max_common_subsequence(str_1, str_2):
+    """TODO
+    """
+    dp = max_length_common_subsequence(str_1,str_2)
+    l1, l2 = len(str_1), len(str_2)
+    subseq = ''
+    while l1>0 and l2>0:
+        if dp[l1][l2] == 1+ dp[l1-1][l2-1]:
+            subseq = str_1[l1-1]+subseq
+            l1 -=1
+            l2-=1
+        elif dp[l1][l2] == dp[l1][l2-1]:
+            l2-=1
+        else:
+            l1-=1
+    return subseq
 ## TODOOOOO TERMINARRRR 
+
+# TODO: PREGUNTAS DE LA VIDA
+# 1. HACE FALTA REORDENAR? PUEDO ASUMIR QUE LA ORDENACIÓN ES CORRECTA EN EL DESCIFRADO
+# 2. QUE TAN ESTRICTOS TIENEN QUE SER LOS ASSERTS
