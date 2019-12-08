@@ -1431,6 +1431,3 @@ def list_opt_ordering_search_tree(m_roots, l: int, r: int):
     return  [root] + \
             list_opt_ordering_search_tree(m_roots,l,root-1) + \
             list_opt_ordering_search_tree(m_roots,root+1,r)
-
-
-## TODO asserts! (Probar que todo va bien con los asserts)
