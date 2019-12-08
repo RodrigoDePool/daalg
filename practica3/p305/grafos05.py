@@ -1027,7 +1027,13 @@ def time_kruskal(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
 MAX_RAND_ADD = 1000
 
 def gen_super_crec(n_terms:int):
-    """TODO
+    """Genera una sucesión super creciente aleatoria
+
+    Argumentos:
+        n_terms : Número de términos de la sucesión
+    Retorno:
+        Devuelve una sucesión super creciente aleatoria en una lista de 
+        números.
     """
     assert n_terms > 0, "El número de términos ha de ser positivo"
     s = random.randint(1, MAX_RAND_ADD)
@@ -1039,7 +1045,13 @@ def gen_super_crec(n_terms:int):
     return superc
 
 def mcd(x:int, y:int):
-    """TODO
+    """Cálcula el máximo común divisor de dos números
+
+    Argumentos:
+        x : Un entero
+        y : Otro entero
+    Retorno:
+        Máximo común divisor de x e y
     """
     if x==0 or y==0:
         return 0
@@ -1050,7 +1062,13 @@ def mcd(x:int, y:int):
     return x
 
 def multiplier(mod: int , mult_ini:int ):
-    """TODO
+    """Genera número aleatorio p que cumple: mcd(p,mod)==1 y mult_ini<p<mod
+
+    Argumentos:
+        mod: Número con el que se buscará otro coprimo
+        multi_ini: Cota inferior del número a generar 
+    Retorno:
+        Devuelve el entero p
     """
     assert mod>mult_ini, "El multiplicador tiene que ser menor que el mod"
     p = random.randint(mult_ini, mod)
@@ -1059,7 +1077,13 @@ def multiplier(mod: int , mult_ini:int ):
     return p
 
 def inverse(p:int, mod:int):
-    """TODO
+    """Devuelve el inverso de p módulo mod
+
+    Argumentos:
+        p: Número al que buscaremos inverso
+        mod: Módulo en el que buscaremos el inverso
+    Retorno:
+        Devuelve el inverso q de p módulo mod
     """
     assert mod>p, "El valor tiene que ser menor que el módulo"
     for q in range(1,mod):
@@ -1143,7 +1167,7 @@ def min_coin_change_matrix(c:int, l_coins):
     """
     assert (c>=0 and all(x>0 for x in l_coins) and (1 in l_coins))
     l_coins = sorted(l_coins)
-    dp = [[-1 for _ in range(c+1)] for __ in range(len(l_coins))] 
+    dp = [[float('inf') for _ in range(c+1)] for __ in range(len(l_coins))] 
     # Condiciones frontera
     for i in range( c+1):
         dp[0][i] = i # La primera moneda es siempre 1
@@ -1158,17 +1182,19 @@ def min_coin_change_matrix(c:int, l_coins):
                 dp[i][v] = dp[i-1][v]
     return dp
 
+# FUNCIONA
 def min_coin_number(c:int, l_coins):
     """TODO
     """
     dp = min_coin_change_matrix(c, l_coins)
     return dp[len(l_coins)-1][c]
 
-
+#ESTO PARECE QUE NO FUNCIONA
 def optimal_change(c:int, l_coins):
     """TODO
     """
     dp = min_coin_change_matrix(c, l_coins)
+    l_coins = sorted(l_coins)
     change = {x:0 for x in l_coins}
     u,v = len(l_coins)-1 , c
     while u>=0 and v>0:
@@ -1225,32 +1251,46 @@ def optimal_order(l_probs):
     """
     l = len(l_probs)
     dp = [[0 for __ in range(l)] for _ in range(l)]
+    dp_roots = [[-1 for __ in range(l)] for _ in range(l)]
     for i in range(l):
         dp[i][i] = l_probs[i]
     for n in range(1, l):
         for left in range(l):
-            if left+n < l:
+            right = left+n
+            if right < l:
                 minv = float('inf')
                 s = 0
-                right = left+n
                 for  middle in range(left, right+1):
-                    s += dp[middle][middle]
                     if middle-1<left:
                         aux = 0+dp[middle+1][right]
                     elif middle+1>right:
                         aux = dp[left][middle-1]+0
                     else:
                         aux = dp[left][middle-1]+dp[middle+1][right]
-                    minv = min(minv, aux)
-                dp[left][right] = s + aux
-    return dp                                
+                    # Guardamos la suma de todos
+                    s += dp[middle][middle]
+                    # Nos quedamos con el menor de los aux
+                    if aux<minv:
+                        minv = aux
+                        dp_roots[left][right] = middle                 
+                # Guardamos el resultado
+                dp[left][right] = s + minv
+    return dp, dp_roots                                
 
-#TODO TERMINAR ESTO
+#TODO Parece que funciona, probar más?
 def list_opt_ordering_search_tree(m_roots, l, r):
     """TODO
     """
-    pass
-## TODOOOOO TERMINARRRR 
+    if l>r:
+        return []
+    elif l==r:
+        return [l]
+    root = m_roots[l][r]
+    return  [root] + \
+            list_opt_ordering_search_tree(m_roots,l,root-1) + \
+            list_opt_ordering_search_tree(m_roots,root+1,r) 
+
+## TODO asserts!
 
 # TODO: PREGUNTAS DE LA VIDA
 # 1. HACE FALTA REORDENAR? PUEDO ASUMIR QUE LA ORDENACIÓN ES CORRECTA EN EL DESCIFRADO
