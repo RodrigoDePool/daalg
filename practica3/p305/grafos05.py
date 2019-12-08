@@ -1020,13 +1020,13 @@ def time_kruskal(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc):
     return meanTimes
 
 
-
 ## PRACTICA 3
 
 # Número aleatorio máximo a generar por encima de la suma
 MAX_RAND_ADD = 1000
 
-def gen_super_crec(n_terms:int):
+
+def gen_super_crec(n_terms: int):
     """Genera una sucesión super creciente aleatoria
 
     Argumentos:
@@ -1038,13 +1038,14 @@ def gen_super_crec(n_terms:int):
     assert n_terms > 0, "El número de términos ha de ser positivo"
     s = random.randint(1, MAX_RAND_ADD)
     superc = [s]
-    for _ in range(n_terms-1):
+    for _ in range(n_terms - 1):
         x = random.randint(1, MAX_RAND_ADD)
-        superc.append(s+x)
-        s = s*2 + x # Suma de todo lo anterior más el nuevo termino
+        superc.append(s + x)
+        s = s * 2 + x  # Suma de todo lo anterior más el nuevo termino
     return superc
 
-def mcd(x:int, y:int):
+
+def mcd(x: int, y: int):
     """Cálcula el máximo común divisor de dos números
 
     Argumentos:
@@ -1053,15 +1054,16 @@ def mcd(x:int, y:int):
     Retorno:
         Máximo común divisor de x e y
     """
-    if x==0 or y==0:
+    if x == 0 or y == 0:
         return 0
-    if x<y:
-        x, y = y ,x
-    while y!=0:
-        x,y = y, x%y 
+    if x < y:
+        x, y = y, x
+    while y != 0:
+        x, y = y, x % y
     return x
 
-def multiplier(mod: int , mult_ini:int ):
+
+def multiplier(mod: int, mult_ini: int):
     """Genera número aleatorio p que cumple: mcd(p,mod)==1 y mult_ini<p<mod
 
     Argumentos:
@@ -1070,13 +1072,14 @@ def multiplier(mod: int , mult_ini:int ):
     Retorno:
         Devuelve el entero p
     """
-    assert mod>mult_ini, "El multiplicador tiene que ser menor que el mod"
+    assert mod > mult_ini, "El multiplicador tiene que ser menor que el mod"
     p = random.randint(mult_ini, mod)
-    while mcd(mod,p)!=1:
+    while mcd(mod, p) != 1:
         p = random.randint(mult_ini, mod)
     return p
 
-def inverse(p:int, mod:int):
+
+def inverse(p: int, mod: int):
     """Devuelve el inverso de p módulo mod
 
     Argumentos:
@@ -1085,59 +1088,113 @@ def inverse(p:int, mod:int):
     Retorno:
         Devuelve el inverso q de p módulo mod
     """
-    assert mod>p, "El valor tiene que ser menor que el módulo"
-    for q in range(1,mod):
-        if (p*q)%mod == 1:
+    assert mod > p, "El valor tiene que ser menor que el módulo"
+    for q in range(1, mod):
+        if (p * q) % mod == 1:
             return q
     return -1
 
+
 def mod_mult_inv(l_sc):
-    """TODO
+    """ Partiendo de una sucesión supercreciente encuentra un mod, p y q aleatorios
+    Que compondrán el resto de la clave privada del cifrado
+
+    Argumentos:
+        l_sc: Es una lista de enteros (sucesión supercreciente)
+    Retorno:
+        Devuelve p,q,mod donde p*q = 1 módulo mod. Y mod es un valor mayor que la
+        suma de toda la sucesión.
     """
     s = sum(l_sc) + random.randint(1, MAX_RAND_ADD)
-    p = multiplier(s, s//5 + 1)
+    p = multiplier(s, s // 5 + 1)
     q = inverse(p, s)
-    return p,q,s
+    return p, q, s
 
-def gen_sucesion_publica(l_sc, p:int, mod:int):
-    """TODO
+
+def gen_sucesion_publica(l_sc, p: int, mod: int):
+    """Genera la sucesión pública del cifrado
+
+    Argumentos:
+        l_sc: Lista de enteros (sucesión supercreciente)
+        p: Multiplicador del cifrado
+        mod: Módulo del cifrado
+    Retorno:
+        Devuelve una lista de enteros que corresponde a la
+        clave pública
     """
-    return [(x*p)%mod for x in l_sc]
+    assert (mod > p and mcd(mod, p) == 1), 'Valores de clave inválidos'
+    return [(x * p) % mod for x in l_sc]
 
-def l_publica_2_l_super_crec(l_pub, q:int, mod:int):
-    """TODO
+
+def l_publica_2_l_super_crec(l_pub, q: int, mod: int):
+    """Transforma la sucesión pública en la privada
+
+    Argumentos:
+        l_pub: Lista de enteros (sucesión de números pública)
+        q: Inverso del multiplicador p
+        mod: Módulo en el que se realizan las operaciones
+    Retorno:
+        Devuelve la lista de enteros correspondiente con la clave
+        privada
     """
-    return [(x*q)%mod for x in l_pub]
+    assert (mod > q and mcd(mod, q) == 1), 'Valores de clave inválidos'
+    return [(x * q) % mod for x in l_pub]
 
-def gen_random_bit_list(n_bits):
-    """TODO
+
+def gen_random_bit_list(n_bits: int):
+    """Genera una lista aleatoria de n_bits
+
+    Argumentos:
+        n_bits: Entero que indica el número de bits
+    Retorno:
+        Una lista aleatoria de valores 0 o 1 con n_bits elementos
     """
-    return [random.randint(0,1) for _ in range(n_bits)]
+    assert n_bits > 0
+    return [random.randint(0, 1) for _ in range(n_bits)]
 
 
-def mh_encrypt(l_bits, l_pub, mod:int):
-    """TODO
+def mh_encrypt(l_bits, l_pub, mod: int):
+    """Cifra la cadena de bits l_bits con la sucesión pública
+
+    Argumentos:
+        l_bits: Lista de bits
+        l_pub: Sucesión pública
+        mod: Módulo en el que se realizan las operaciones
+    Retorno:
+        Devuelve una lista con los resultados de cada bloque de 
+        tamaño len(l_pub) cifrado
     """
-    if len(l_bits)%len(l_pub)!=0: # Rellenamos con ceros
-        l_bits = l_bits +  [0]*(len(l_pub)- len(l_bits)%len(l_pub))
-    
+    if len(l_bits) % len(l_pub) != 0:  # Rellenamos con ceros
+        l_bits = l_bits + [0] * (len(l_pub) - len(l_bits) % len(l_pub))
+
     encrypted = []
     i_bits = 0
-    while i_bits<len(l_bits):
+    while i_bits < len(l_bits):
         # Ciframos un bloque
         e = 0
         for _ in range(len(l_pub)):
-            e += l_pub[i_bits%len(l_pub)]*l_bits[i_bits]
+            e += l_pub[i_bits % len(l_pub)] * l_bits[i_bits]
             i_bits += 1
         encrypted.append(e)
     return encrypted
 
-def mh_block_decrypt(c:int, l_sc, inv:int, mod:int):
-    """TODO
+
+def mh_block_decrypt(c: int, l_sc, inv: int, mod: int):
+    """Descifra un bloque usando la clave privada
+
+    Argumentos:
+        c: Bloque a descifrar
+        l_sc: Sucesión super creciente
+        inv: Inverso multiplicativo de la clave privada
+        mod: Módulo en el que se realizan las operaciones
+    Retorno:
+        Devuelve una lista con los bits que corresponden
+        al bloque descifrado
     """
-    c = (c*inv)%mod
+    assert (c >= 0 and mod > 0 and inv > 0 and mcd(mod, inv) == 1)
+    c = (c * inv) % mod
     bits = []
-    for i in range(len(l_sc)-1, -1, -1):
+    for i in range(len(l_sc) - 1, -1, -1):
         if c == 0:
             bits.append(0)
         elif l_sc[i] < c:
@@ -1151,104 +1208,177 @@ def mh_block_decrypt(c:int, l_sc, inv:int, mod:int):
     bits.reverse()
     return bits
 
-def mh_decrypt(l_cifra, l_sc, inv:int , mod:int):
-    """TODO
+
+def mh_decrypt(l_cifra, l_sc, inv: int, mod: int):
+    """Descifra un mensaje completo usando la clave privada
+    (Lista de bloques)
+
+    Argumentos:
+        l_cifra: Lista de cifras que corresponden a los bloques 
+                 encriptados
+        l_sc: Sucesión supercreciente de enteros de la clave priv
+        inv: Inverso multiplicativo de la clave priv
+        mod: Módulo en el que se realiza el cifrado
+    Retorno:
+        Devuelve una lista de bits con el mensaje entero descifrado.
     """
+    assert (mod > 0 and inv > 0 and mcd(mod, inv) == 1)
     bits = []
-    for cifra  in l_cifra:
+    for cifra in l_cifra:
         bits += mh_block_decrypt(cifra, l_sc, inv, mod)
     return bits
 
-# TODO FALTA PROBAR TODO ESTE CODIGOOOOO
-# USO ASSERTS MÁS ESTRICTOS???
-#TODO: PROBAR A PARTIR DE AQUÍ (creo que coin funciona)
-def min_coin_change_matrix(c:int, l_coins):
-    """TODO
+
+def min_coin_change_matrix(c: int, l_coins):
+    """Función que devuelve la matriz del problema del cambio
+
+    Argumentos:
+        c: Entero que corresponden con el valor que se pretende
+           devolver.
+        l_coins: Lista de enteros con los valores de las monedas
+                 disponibles
+    Retorno:
+        Devuelve la matriz de la solución dinámica
     """
-    assert (c>=0 and all(x>0 for x in l_coins) and (1 in l_coins))
+    assert (c >= 0 and all(x > 0 for x in l_coins) and (1 in l_coins))
     l_coins = sorted(l_coins)
-    dp = [[float('inf') for _ in range(c+1)] for __ in range(len(l_coins))] 
+    dp = [[float('inf') for _ in range(c + 1)] for __ in range(len(l_coins))]
     # Condiciones frontera
-    for i in range( c+1):
-        dp[0][i] = i # La primera moneda es siempre 1
+    for i in range(c + 1):
+        dp[0][i] = i  # La primera moneda es siempre 1
     for i in range(1, len(l_coins)):
         dp[i][0] = 0
     # Dynamic programming
-    for i in range(1,len(l_coins)):
-        for v in range(1,c+1):
-            if v-l_coins[i] >= 0:
-                dp[i][v] = min(dp[i-1][v], 1+dp[i][v-l_coins[i]])
+    for i in range(1, len(l_coins)):
+        for v in range(1, c + 1):
+            if v - l_coins[i] >= 0:
+                dp[i][v] = min(dp[i - 1][v], 1 + dp[i][v - l_coins[i]])
             else:
-                dp[i][v] = dp[i-1][v]
+                dp[i][v] = dp[i - 1][v]
     return dp
 
-# FUNCIONA
-def min_coin_number(c:int, l_coins):
-    """TODO
+
+def min_coin_number(c: int, l_coins):
+    """Devuelve el número mínimo de monedas que hacen falta
+    para devolver una cierta cantidad.
+
+    Argumentos:
+        c: Valor que se pretende devolver
+        l_coins: Lista de enteros que corresponden con los
+                 valores de las monedas disponibles
+    Retorno:
+        Devuelve un entero que corresponde con el mínimo 
+        número de monedas que hacen falta para devolver c.
+    Nota: Es necesario que la lista l_coins siempre
+          disponga de la moneda 1.
     """
     dp = min_coin_change_matrix(c, l_coins)
-    return dp[len(l_coins)-1][c]
+    return dp[len(l_coins) - 1][c]
 
-#ESTO PARECE QUE NO FUNCIONA
-def optimal_change(c:int, l_coins):
-    """TODO
+
+def optimal_change(c: int, l_coins):
+    """Devuelve uno de los posibles cambios que se pueden
+    dar con el mínimo número de monedas posibles
+
+    Argumentos:
+        c: Valor a devolver
+        l_coins: Lista de enteros con el valor de las monedas
+                 disponibles
+    Retorno:
+        Devuelve un diccionario que indica cuántas monedas de
+        cada tipo hacen falta para devolver c con el mín núm 
+        de moendas:
+            dic[moneda] = número de monedas
     """
     dp = min_coin_change_matrix(c, l_coins)
     l_coins = sorted(l_coins)
-    change = {x:0 for x in l_coins}
-    u,v = len(l_coins)-1 , c
-    while u>=0 and v>0:
-        if u>0 and dp[u][v] == dp[u-1][v]:
-            u = u-1
+    change = {x: 0 for x in l_coins}
+    u, v = len(l_coins) - 1, c
+    while u >= 0 and v > 0:
+        if u > 0 and dp[u][v] == dp[u - 1][v]:
+            u = u - 1
         else:
             v = v - l_coins[u]
             change[l_coins[u]] += 1
     return change
 
-def max_common_subsequence_problem(str_1:str, str_2: str):
-    """TODO
+
+def max_common_subsequence_problem(str_1: str, str_2: str):
+    """Devuelve la matriz que resuelve el problema de la
+    subsecuencia más larga entre dos strings
+
+    Argumentos:
+        str_1: Primera string a utilizar
+        str_2: Segunda string en la que buscaremos la subseq
+    Retorno:
+        Devuelve la matriz que resuelve el problema de encontrar
+        la subsecuencia más larga entre dos strings.
     """
     l1, l2 = len(str_1), len(str_2)
-    dp = [[0 for __ in range(l2+1)] for _ in range(l1+1)]
-    for i in range(1,l1+1):
-        for j in range(1,l2+1):
-            if str_1[i-1] == str_2[j-1]:
-                dp[i][j] = 1 + dp[i-1][j-1]
+    dp = [[0 for __ in range(l2 + 1)] for _ in range(l1 + 1)]
+    for i in range(1, l1 + 1):
+        for j in range(1, l2 + 1):
+            if str_1[i - 1] == str_2[j - 1]:
+                dp[i][j] = 1 + dp[i - 1][j - 1]
             else:
-                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
     return dp
 
-def max_length_common_subsequence(str_1:str, str_2: str):
-    """TODO
+
+def max_length_common_subsequence(str_1: str, str_2: str):
+    """Devuelve la longitud de la subsecuencia más larga entre
+    dos strings.
+
+    Argumentos:
+        str_1: Primera string
+        str_2: Segunda string
+    Retorno:
+        Devuelve un entero con la longitud de la subsecuencia
+        más larga entre str_1 y str_2
     """
     l1, l2 = len(str_1), len(str_2)
-    dp = max_common_subsequence_problem(str_1,str_2)
+    dp = max_common_subsequence_problem(str_1, str_2)
     return dp[l1][l2]
 
 
-def find_max_common_subsequence(str_1:str, str_2:str):
-    """TODO
+def find_max_common_subsequence(str_1: str, str_2: str):
+    """Devuelve la subsecuencia más larga entre dos strings
+
+    Argumentos:
+        str_1: String 1
+        str_2: String 2
+    Retorno:
+        Devuelve una string que es la subsecuencia más larga
+        entre las strings str_1 y str_2
     """
-    dp = max_common_subsequence_problem(str_1,str_2)
+    dp = max_common_subsequence_problem(str_1, str_2)
     l1, l2 = len(str_1), len(str_2)
     subseq = ''
-    while l1>0 and l2>0:
-        
-        if dp[l1][l2] == dp[l1][l2-1]:
-            l2-=1
-        elif dp[l1][l2] == dp[l1-1][l2]:
-            l1-=1
-        elif dp[l1][l2] == 1 + dp[l1-1][l2-1]:
-            subseq = str_1[l1-1]+subseq
-            l1 -=1
-            l2-=1
+    while l1 > 0 and l2 > 0:
+
+        if dp[l1][l2] == dp[l1][l2 - 1]:
+            l2 -= 1
+        elif dp[l1][l2] == dp[l1 - 1][l2]:
+            l1 -= 1
+        elif dp[l1][l2] == 1 + dp[l1 - 1][l2 - 1]:
+            subseq = str_1[l1 - 1] + subseq
+            l1 -= 1
+            l2 -= 1
     return subseq
 
 
-# TODO PRBAR ESTO Y COINCHANGE
 def optimal_order(l_probs):
-    """TODO
+    """Devuelve las dos matrices que resuelven el problema del 
+    árbol de búsqueda óptimo
+
+    Argumentos:
+        l_probs: Una lista con las probabilidades de cada nodo
+    Retorno:
+        Dos matrices: la primera indica la solución dinámica
+        para encontrar los pesos de los árboles óptimos;
+        la segunda indica las raíces de dichos árboles.
     """
+    assert sum(l_probs) == 1, 'Las probabilidades de los nodos deben sumar 1'
     l = len(l_probs)
     dp = [[0 for __ in range(l)] for _ in range(l)]
     dp_roots = [[-1 for __ in range(l)] for _ in range(l)]
@@ -1256,42 +1386,51 @@ def optimal_order(l_probs):
         dp[i][i] = l_probs[i]
     for n in range(1, l):
         for left in range(l):
-            right = left+n
+            right = left + n
             if right < l:
                 minv = float('inf')
                 s = 0
-                for  middle in range(left, right+1):
-                    if middle-1<left:
-                        aux = 0+dp[middle+1][right]
-                    elif middle+1>right:
-                        aux = dp[left][middle-1]+0
+                for middle in range(left, right + 1):
+                    if middle - 1 < left:
+                        aux = 0 + dp[middle + 1][right]
+                    elif middle + 1 > right:
+                        aux = dp[left][middle - 1] + 0
                     else:
-                        aux = dp[left][middle-1]+dp[middle+1][right]
+                        aux = dp[left][middle - 1] + dp[middle + 1][right]
                     # Guardamos la suma de todos
                     s += dp[middle][middle]
                     # Nos quedamos con el menor de los aux
-                    if aux<minv:
+                    if aux < minv:
                         minv = aux
-                        dp_roots[left][right] = middle                 
+                        dp_roots[left][right] = middle
                 # Guardamos el resultado
                 dp[left][right] = s + minv
-    return dp, dp_roots                                
+    return dp, dp_roots
 
-#TODO Parece que funciona, probar más?
-def list_opt_ordering_search_tree(m_roots, l, r):
-    """TODO
+
+def list_opt_ordering_search_tree(m_roots, l: int, r: int):
+    """Devuelve una de las posibles listas de inserción
+    de los nodos en un árbol binario para obtener el árbol
+    de búsqueda óptimo.
+
+    Argumentos:
+        m_roots: La matriz que produce la solución
+                 dinámica a este problema
+        l: Entero (Left)
+        r: Entero (Right)
+    Retorno:
+        Lista de inserción de un posible árbol de
+        búsqueda óptimo usando los nodos de left
+        a right
     """
-    if l>r:
+    if l > r:
         return []
-    elif l==r:
+    elif l == r:
         return [l]
     root = m_roots[l][r]
     return  [root] + \
             list_opt_ordering_search_tree(m_roots,l,root-1) + \
-            list_opt_ordering_search_tree(m_roots,root+1,r) 
+            list_opt_ordering_search_tree(m_roots,root+1,r)
 
-## TODO asserts!
 
-# TODO: PREGUNTAS DE LA VIDA
-# 1. HACE FALTA REORDENAR? PUEDO ASUMIR QUE LA ORDENACIÓN ES CORRECTA EN EL DESCIFRADO
-# 2. QUE TAN ESTRICTOS TIENEN QUE SER LOS ASSERTS
+## TODO asserts! (Probar que todo va bien con los asserts)
