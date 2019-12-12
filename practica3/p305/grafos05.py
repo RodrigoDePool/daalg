@@ -1078,6 +1078,26 @@ def multiplier(mod: int, mult_ini: int):
         p = random.randint(mult_ini, mod)
     return p
 
+def euclides_extendido(a:int , b:int):
+    """Algoritmo de euclides extendido
+
+    Argumentos:
+        a: Primero entero del algoritmo de euclides extendido
+        b: El segundo
+    Retorno:
+        Devuelve los mcd y los coeficientes de la ec de Bezout
+    """
+    x,y, = 0,1
+    u,v = 1,0
+    while a != 0:
+        q, r = b//a, b%a 
+        m, n = x-u*q, y-v*q
+        x,y = u,v
+        u,v =  m,n
+        b,a = a,r
+    mcd = b
+    return mcd, x, y
+
 
 def inverse(p: int, mod: int):
     """Devuelve el inverso de p módulo mod
@@ -1089,10 +1109,8 @@ def inverse(p: int, mod: int):
         Devuelve el inverso q de p módulo mod
     """
     assert mod > p, "El valor tiene que ser menor que el módulo"
-    for q in range(1, mod):
-        if (p * q) % mod == 1:
-            return q
-    return -1
+    _, x, _ = euclides_extendido(p,mod)
+    return x % mod
 
 
 def mod_mult_inv(l_sc):
