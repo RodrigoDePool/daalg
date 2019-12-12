@@ -13102,7 +13102,7 @@ Entonces, naturalmente, el mínimo valor que puede tener el término n-ésimo de
 <li>Queremos una clave que requiera menos de 1 GB de memoria (4 Gigabits).  </li>
 <li>Utilizaremos la sucesión con los valores más pequeños posibles para poder maximizar el número de términos.</li>
 </ol>
-<p>Si tenemos N términos y el término i-ésimo requiere i bits para ser representado (el número $2^i$), entonces para representar toda la sucesión necesitamos  $\Sigma_{i=0}^{N}i = \frac{N*(N+1)}{2}$ bits. Teniendo en cuenta que queremos el máximo N que quepa en 4 Gigabits necesitamos encontrar el mayor N que cumpla:
+<p>Si tenemos N términos y el término i-ésimo requiere i bits para ser representado (el número $2^i$), entonces para representar toda la sucesión necesitamos  $\Sigma_{i=0}^{N}i = \frac{N*(N+1)}{2}$ bits. Teniendo en cuenta que queremos el máximo N que quepa en 4 Gigabits, necesitamos encontrar el mayor N que cumpla:
 \begin{align*}
 \frac{N*(N+1)}{2} \leq 2^{32}
 \end{align*}
@@ -13165,7 +13165,7 @@ lcs[i][j] &amp;=&amp;
 0 &amp; siS_{1}[i]\neq S_{2}[j]
 \end{cases}
 \end{eqnarray*}</p>
-<p>Donde $lcs[i][j]$ se refiera a la longitud de la subcadena común más grande utilizando como último caracter $S_1[i]=S_2[j]$ , si no son iguales entonces esa longitud sería 0. Una vez se tiene rellenada toda la matriz $lcs$ la solución será el máximo valor de la matriz.</p>
+<p>Donde $lcs[i][j]$ se refiera a la longitud de la subcadena común más grande utilizando como último caracter $S_1[i]=S_2[j]$ , si no son iguales entonces esa longitud sería 0. Una vez se tiene rellenada toda la matriz $lcs$, la solución será el máximo valor de la matriz.</p>
 <p>Veamos la matriz que resulta de ejecutar el algoritmo con los apellidos del único intregante de este grupo:</p>
 <ul>
 <li>$S_1=POOL$   </li>

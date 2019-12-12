@@ -1,0 +1,573 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module grafos05</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>grafos05</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/hey/Desktop/daalg/practica3/p305/grafos05.py">/home/hey/Desktop/daalg/practica3/p305/grafos05.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gzip.html">gzip</a><br>
+<a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="networkx.html">networkx</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="pickle.html">pickle</a><br>
+<a href="random.html">random</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-TGF_2_d_g"><strong>TGF_2_d_g</strong></a>(f_name)</dt><dd><tt>Convierte&nbsp;un&nbsp;grafo&nbsp;en&nbsp;TGF&nbsp;a&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;f_name&nbsp;--&nbsp;Fichero&nbsp;en&nbsp;el&nbsp;que&nbsp;se&nbsp;encuentra&nbsp;&nbsp;el&nbsp;grafo&nbsp;en&nbsp;TGF.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.</tt></dd></dl>
+ <dl><dt><a name="-calculate_sparse_factor"><strong>calculate_sparse_factor</strong></a>(g)</dt><dd><tt>Calcula&nbsp;el&nbsp;factor&nbsp;de&nbsp;dispersion&nbsp;de&nbsp;un&nbsp;grafo&nbsp;representado&nbsp;como&nbsp;matriz.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;g&nbsp;--&nbsp;Matriz&nbsp;de&nbsp;adyacencias&nbsp;del&nbsp;grafo.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;del&nbsp;grafo&nbsp;(float).</tt></dd></dl>
+ <dl><dt><a name="-check_pda"><strong>check_pda</strong></a>(p, o, a)</dt><dd><tt>Devuelve&nbsp;los&nbsp;puntos&nbsp;de&nbsp;articulación&nbsp;de&nbsp;un&nbsp;multigrafo<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p&nbsp;({nodo:nodo})&nbsp;--&nbsp;Dict&nbsp;de&nbsp;padres&nbsp;del&nbsp;árbol&nbsp;DFS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;({nodo:int})&nbsp;--&nbsp;Órden&nbsp;de&nbsp;descubrimiento&nbsp;del&nbsp;árbol<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;({nodo:int})&nbsp;--&nbsp;Órden&nbsp;de&nbsp;ascenso&nbsp;de&nbsp;cada&nbsp;nodo<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Si&nbsp;el&nbsp;grafo&nbsp;no&nbsp;es&nbsp;conexo&nbsp;devuelve&nbsp;None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Si&nbsp;el&nbsp;grafo&nbsp;es&nbsp;conexo&nbsp;entonces&nbsp;devuelve&nbsp;una&nbsp;lista<br>
+&nbsp;&nbsp;&nbsp;&nbsp;con&nbsp;los&nbsp;puntos&nbsp;de&nbsp;articulación.</tt></dd></dl>
+ <dl><dt><a name="-check_sparse_factor"><strong>check_sparse_factor</strong></a>(n_grafos, n_nodes, sparse_factor)</dt><dd><tt>Funcion&nbsp;que&nbsp;comprueba&nbsp;que&nbsp;los&nbsp;factores&nbsp;de&nbsp;dispersion&nbsp;generados&nbsp;concuerdan<br>
+con&nbsp;los&nbsp;esperados.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_grafos&nbsp;--&nbsp;Número&nbsp;de&nbsp;grafos&nbsp;a&nbsp;generar&nbsp;para&nbsp;la&nbsp;comprobacion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes&nbsp;--&nbsp;Número&nbsp;de&nbsp;nodos&nbsp;de&nbsp;cada&nbsp;grafo&nbsp;generado.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sparse_factor&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;esperado.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Media&nbsp;de&nbsp;los&nbsp;factores&nbsp;de&nbsp;dispersion&nbsp;obtenidos&nbsp;(float).<br>
+Nota:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Idealmente&nbsp;el&nbsp;retorno&nbsp;y&nbsp;el&nbsp;sparse_factor&nbsp;dado&nbsp;como&nbsp;argumento&nbsp;son<br>
+&nbsp;&nbsp;&nbsp;&nbsp;muy&nbsp;parecidos.</tt></dd></dl>
+ <dl><dt><a name="-cuenta_ramas"><strong>cuenta_ramas</strong></a>(m_g)</dt><dd><tt>Cuenta&nbsp;el&nbsp;numero&nbsp;de&nbsp;ramas&nbsp;en&nbsp;grafo&nbsp;representado&nbsp;como&nbsp;matriz.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;m_g&nbsp;--&nbsp;Matriz&nbsp;de&nbsp;adyacencia&nbsp;que&nbsp;representa&nbsp;al&nbsp;grafo.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Numero&nbsp;(entero)&nbsp;de&nbsp;ramas.</tt></dd></dl>
+ <dl><dt><a name="-d_g_2_TGF"><strong>d_g_2_TGF</strong></a>(d_g, f_name)</dt><dd><tt>Escribe&nbsp;un&nbsp;grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias&nbsp;en&nbsp;TGF.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;f_name&nbsp;--&nbsp;Fichero&nbsp;en&nbsp;el&nbsp;que&nbsp;se&nbsp;volcara&nbsp;el&nbsp;grafo&nbsp;como&nbsp;TGF.</tt></dd></dl>
+ <dl><dt><a name="-d_g_2_m_g"><strong>d_g_2_m_g</strong></a>(d_g)</dt><dd><tt>Transforma&nbsp;una&nbsp;listas&nbsp;de&nbsp;adyacencias&nbsp;en&nbsp;una&nbsp;matriz&nbsp;de&nbsp;adyacencia.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;matriz&nbsp;de&nbsp;adyacencias.</tt></dd></dl>
+ <dl><dt><a name="-d_g_2_nx_g"><strong>d_g_2_nx_g</strong></a>(d_g)</dt><dd><tt>Convierte&nbsp;un&nbsp;grafo&nbsp;en&nbsp;lista&nbsp;de&nbsp;adyacencias&nbsp;en&nbsp;uno&nbsp;de&nbsp;NetworkX.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Grafo&nbsp;como&nbsp;objeto&nbsp;de&nbsp;libreria&nbsp;de&nbsp;NetworkX.</tt></dd></dl>
+ <dl><dt><a name="-dijkstra_d"><strong>dijkstra_d</strong></a>(d_g, u)</dt><dd><tt>Ejecuta&nbsp;dijkstra&nbsp;sobre&nbsp;un&nbsp;grafo&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;--&nbsp;Nodo&nbsp;desde&nbsp;el&nbsp;que&nbsp;se&nbsp;inicia&nbsp;el&nbsp;algoritmo.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(a,b):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;--&nbsp;Lista&nbsp;de&nbsp;distancias&nbsp;minimas&nbsp;(a[i]&nbsp;distancia&nbsp;minima&nbsp;de&nbsp;u&nbsp;a&nbsp;i).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;--&nbsp;Lista&nbsp;de&nbsp;padres&nbsp;en&nbsp;caminos&nbsp;minimos&nbsp;(a[i]&nbsp;padre&nbsp;de&nbsp;i).</tt></dd></dl>
+ <dl><dt><a name="-dijkstra_m"><strong>dijkstra_m</strong></a>(m_g, u)</dt><dd><tt>Ejecuta&nbsp;dijkstra&nbsp;sobre&nbsp;un&nbsp;grafo&nbsp;como&nbsp;matriz&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;m_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;matriz&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;--&nbsp;Nodo&nbsp;desde&nbsp;el&nbsp;que&nbsp;se&nbsp;inicia&nbsp;el&nbsp;algoritmo.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(a,b):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;--&nbsp;Lista&nbsp;de&nbsp;distancias&nbsp;minimas&nbsp;(a[i]&nbsp;distancia&nbsp;minima&nbsp;de&nbsp;u&nbsp;a&nbsp;i).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;--&nbsp;Lista&nbsp;de&nbsp;padres&nbsp;en&nbsp;caminos&nbsp;minimos&nbsp;(a[i]&nbsp;padre&nbsp;de&nbsp;i).</tt></dd></dl>
+ <dl><dt><a name="-edges"><strong>edges</strong></a>(d_g)</dt><dd><tt>Dado&nbsp;un&nbsp;grafo&nbsp;representado&nbsp;como&nbsp;diccionario&nbsp;devuelve&nbsp;una&nbsp;lista&nbsp;de&nbsp;sus&nbsp;ramas<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;diccionario&nbsp;de&nbsp;diccionarios<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Una&nbsp;lista&nbsp;de&nbsp;3-tuplas&nbsp;con&nbsp;todas&nbsp;las&nbsp;ramas&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[(nodo_origen1,&nbsp;nodo_destino1,&nbsp;peso1),&nbsp;...]</tt></dd></dl>
+ <dl><dt><a name="-euclides_extendido"><strong>euclides_extendido</strong></a>(a:int, b:int)</dt><dd><tt>Algoritmo&nbsp;de&nbsp;euclides&nbsp;extendido<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a:&nbsp;Primero&nbsp;entero&nbsp;del&nbsp;algoritmo&nbsp;de&nbsp;euclides&nbsp;extendido<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b:&nbsp;El&nbsp;segundo<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;los&nbsp;mcd&nbsp;y&nbsp;los&nbsp;coeficientes&nbsp;de&nbsp;la&nbsp;ec&nbsp;de&nbsp;Bezout</tt></dd></dl>
+ <dl><dt><a name="-find"><strong>find</strong></a>(ind, d_cd, fl_cc)</dt><dd><tt>Encuentra&nbsp;el&nbsp;representante&nbsp;de&nbsp;un&nbsp;elemento&nbsp;en&nbsp;una&nbsp;estructura&nbsp;de&nbsp;CD.<br>
+&nbsp;<br>
+Argumento:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ind&nbsp;--&nbsp;Elemento&nbsp;del&nbsp;que&nbsp;se&nbsp;quiere&nbsp;buscar&nbsp;su&nbsp;representante<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_cd&nbsp;--&nbsp;Estructura&nbsp;de&nbsp;conjunto&nbsp;disjunto<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fl_cc&nbsp;(bool)&nbsp;--&nbsp;Si&nbsp;debería,&nbsp;o&nbsp;no,&nbsp;realizar&nbsp;compresión&nbsp;de&nbsp;caminos.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;el&nbsp;representante&nbsp;del&nbsp;conjunto&nbsp;al&nbsp;que&nbsp;pertenece&nbsp;ind&nbsp;en&nbsp;el&nbsp;CD.</tt></dd></dl>
+ <dl><dt><a name="-find_max_common_subsequence"><strong>find_max_common_subsequence</strong></a>(str_1:str, str_2:str)</dt><dd><tt>Devuelve&nbsp;la&nbsp;subsecuencia&nbsp;más&nbsp;larga&nbsp;entre&nbsp;dos&nbsp;strings<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str_1:&nbsp;String&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str_2:&nbsp;String&nbsp;2<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;una&nbsp;string&nbsp;que&nbsp;es&nbsp;la&nbsp;subsecuencia&nbsp;más&nbsp;larga<br>
+&nbsp;&nbsp;&nbsp;&nbsp;entre&nbsp;las&nbsp;strings&nbsp;str_1&nbsp;y&nbsp;str_2</tt></dd></dl>
+ <dl><dt><a name="-fit_plot"><strong>fit_plot</strong></a>(l, func_2_fit, size_ini, size_fin, step, label=None, rho=False, xlabel=None, ylabel=None)</dt><dd><tt>Función&nbsp;aportada&nbsp;en&nbsp;el&nbsp;notebook&nbsp;auxiliar</tt></dd></dl>
+ <dl><dt><a name="-gen_random_bit_list"><strong>gen_random_bit_list</strong></a>(n_bits:int)</dt><dd><tt>Genera&nbsp;una&nbsp;lista&nbsp;aleatoria&nbsp;de&nbsp;n_bits<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_bits:&nbsp;Entero&nbsp;que&nbsp;indica&nbsp;el&nbsp;número&nbsp;de&nbsp;bits<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Una&nbsp;lista&nbsp;aleatoria&nbsp;de&nbsp;valores&nbsp;0&nbsp;o&nbsp;1&nbsp;con&nbsp;n_bits&nbsp;elementos</tt></dd></dl>
+ <dl><dt><a name="-gen_sucesion_publica"><strong>gen_sucesion_publica</strong></a>(l_sc, p:int, mod:int)</dt><dd><tt>Genera&nbsp;la&nbsp;sucesión&nbsp;pública&nbsp;del&nbsp;cifrado<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_sc:&nbsp;Lista&nbsp;de&nbsp;enteros&nbsp;(sucesión&nbsp;supercreciente)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p:&nbsp;Multiplicador&nbsp;del&nbsp;cifrado<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mod:&nbsp;Módulo&nbsp;del&nbsp;cifrado<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;una&nbsp;lista&nbsp;de&nbsp;enteros&nbsp;que&nbsp;corresponde&nbsp;a&nbsp;la<br>
+&nbsp;&nbsp;&nbsp;&nbsp;clave&nbsp;pública</tt></dd></dl>
+ <dl><dt><a name="-gen_super_crec"><strong>gen_super_crec</strong></a>(n_terms:int)</dt><dd><tt>Genera&nbsp;una&nbsp;sucesión&nbsp;super&nbsp;creciente&nbsp;aleatoria<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_terms&nbsp;:&nbsp;Número&nbsp;de&nbsp;términos&nbsp;de&nbsp;la&nbsp;sucesión<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;una&nbsp;sucesión&nbsp;super&nbsp;creciente&nbsp;aleatoria&nbsp;en&nbsp;una&nbsp;lista&nbsp;de&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;números.</tt></dd></dl>
+ <dl><dt><a name="-graph_2_multigraph"><strong>graph_2_multigraph</strong></a>(d_mg)</dt><dd><tt>Recibe&nbsp;un&nbsp;grafo&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias&nbsp;y&nbsp;devuelve&nbsp;un&nbsp;multigrafo<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_mg&nbsp;({int:{int:int}})&nbsp;--&nbsp;Lista&nbsp;de&nbsp;adyacencias&nbsp;de&nbsp;un&nbsp;grafo<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Retorna&nbsp;las&nbsp;listas&nbsp;de&nbsp;adyacencias&nbsp;del&nbsp;multigrafo&nbsp;resultante&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;({int:{int:{int:int}}})</tt></dd></dl>
+ <dl><dt><a name="-hijos_bp"><strong>hijos_bp</strong></a>(u, p)</dt><dd><tt>Calcula&nbsp;los&nbsp;hijos&nbsp;de&nbsp;un&nbsp;nodo&nbsp;en&nbsp;un&nbsp;árbol&nbsp;DFS<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;--&nbsp;Nodo&nbsp;del&nbsp;que&nbsp;se&nbsp;quieren&nbsp;saber&nbsp;sus&nbsp;hijos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p&nbsp;--&nbsp;Diccionario&nbsp;de&nbsp;padres&nbsp;del&nbsp;árbol&nbsp;DFS<br>
+Returno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Un&nbsp;array&nbsp;con&nbsp;los&nbsp;hijos&nbsp;del&nbsp;nodo&nbsp;en&nbsp;el&nbsp;árbol</tt></dd></dl>
+ <dl><dt><a name="-init_cd"><strong>init_cd</strong></a>(d_g)</dt><dd><tt>Iniciamos&nbsp;la&nbsp;estructura&nbsp;de&nbsp;conjuntos&nbsp;disjuntos<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Lista&nbsp;de&nbsp;adyacencias&nbsp;de&nbsp;un&nbsp;multigrafo/grafo<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;la&nbsp;estructura&nbsp;cd&nbsp;incializada</tt></dd></dl>
+ <dl><dt><a name="-insert_pq"><strong>insert_pq</strong></a>(d_mg, q)</dt><dd><tt>Inserta&nbsp;todas&nbsp;las&nbsp;ramas&nbsp;de&nbsp;un&nbsp;multigrafo&nbsp;no&nbsp;dirigido.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_mg&nbsp;--&nbsp;Lista&nbsp;de&nbsp;adyacencia&nbsp;de&nbsp;multigrafo&nbsp;NO&nbsp;dirigido<br>
+&nbsp;&nbsp;&nbsp;&nbsp;q&nbsp;--&nbsp;Cola&nbsp;en&nbsp;la&nbsp;que&nbsp;se&nbsp;insertarán&nbsp;las&nbsp;ramas<br>
+Nota:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Cada&nbsp;rama&nbsp;del&nbsp;multigrafo&nbsp;no&nbsp;dirigido&nbsp;se&nbsp;introduce&nbsp;en&nbsp;un&nbsp;solo&nbsp;sentido<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;No&nbsp;se&nbsp;introducen&nbsp;los&nbsp;ciclos&nbsp;(no&nbsp;son&nbsp;útiles&nbsp;para&nbsp;Kruskal)</tt></dd></dl>
+ <dl><dt><a name="-inverse"><strong>inverse</strong></a>(p:int, mod:int)</dt><dd><tt>Devuelve&nbsp;el&nbsp;inverso&nbsp;de&nbsp;p&nbsp;módulo&nbsp;mod<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p:&nbsp;Número&nbsp;al&nbsp;que&nbsp;buscaremos&nbsp;inverso<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mod:&nbsp;Módulo&nbsp;en&nbsp;el&nbsp;que&nbsp;buscaremos&nbsp;el&nbsp;inverso<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;el&nbsp;inverso&nbsp;q&nbsp;de&nbsp;p&nbsp;módulo&nbsp;mod</tt></dd></dl>
+ <dl><dt><a name="-kruskal"><strong>kruskal</strong></a>(d_g, fl_cc=True)</dt><dd><tt>Devuelve&nbsp;el&nbsp;árbol&nbsp;abarcador&nbsp;mínimo&nbsp;calculado&nbsp;con&nbsp;Kruskal<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Lista&nbsp;de&nbsp;adyacencias&nbsp;del&nbsp;multigrafo&nbsp;no&nbsp;dirigido.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fl_cc&nbsp;--&nbsp;Si&nbsp;deberíamos&nbsp;utilizar,&nbsp;o&nbsp;no,&nbsp;compresión&nbsp;de&nbsp;caminos&nbsp;en&nbsp;el&nbsp;CD.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;un&nbsp;multigrafo&nbsp;con&nbsp;el&nbsp;MST,&nbsp;o&nbsp;None&nbsp;si&nbsp;el&nbsp;grafo&nbsp;no&nbsp;es&nbsp;conexo.</tt></dd></dl>
+ <dl><dt><a name="-kruskal2"><strong>kruskal2</strong></a>(d_g, fl_cc=True)</dt><dd><tt>Devuelve&nbsp;el&nbsp;árbol&nbsp;abarcador&nbsp;mínimo&nbsp;calculado&nbsp;con&nbsp;Kruskal<br>
+Además,&nbsp;devuelve&nbsp;el&nbsp;tiempo&nbsp;de&nbsp;ejecución&nbsp;del&nbsp;algoritmo&nbsp;<br>
+(sin&nbsp;contar&nbsp;la&nbsp;gestión&nbsp;de&nbsp;la&nbsp;cola&nbsp;de&nbsp;prioridad)<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_g&nbsp;--&nbsp;Lista&nbsp;de&nbsp;adyacencias&nbsp;del&nbsp;multigrafo&nbsp;no&nbsp;dirigido.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fl_cc&nbsp;--&nbsp;Si&nbsp;deberíamos&nbsp;utilizar,&nbsp;o&nbsp;no,&nbsp;compresión&nbsp;de&nbsp;caminos&nbsp;en&nbsp;el&nbsp;CD.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Si&nbsp;el&nbsp;grafo&nbsp;es&nbsp;conexo:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MST&nbsp;--&nbsp;Multigrafo&nbsp;con&nbsp;el&nbsp;MST<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t&nbsp;--&nbsp;Tiempo&nbsp;de&nbsp;ejecución&nbsp;del&nbsp;algoritmo&nbsp;sin&nbsp;la&nbsp;inserción&nbsp;inicial&nbsp;a&nbsp;la&nbsp;cola<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Si&nbsp;el&nbsp;grafo&nbsp;no&nbsp;es&nbsp;conexo:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1</tt></dd></dl>
+ <dl><dt><a name="-l_publica_2_l_super_crec"><strong>l_publica_2_l_super_crec</strong></a>(l_pub, q:int, mod:int)</dt><dd><tt>Transforma&nbsp;la&nbsp;sucesión&nbsp;pública&nbsp;en&nbsp;la&nbsp;privada<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_pub:&nbsp;Lista&nbsp;de&nbsp;enteros&nbsp;(sucesión&nbsp;de&nbsp;números&nbsp;pública)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;q:&nbsp;Inverso&nbsp;del&nbsp;multiplicador&nbsp;p<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mod:&nbsp;Módulo&nbsp;en&nbsp;el&nbsp;que&nbsp;se&nbsp;realizan&nbsp;las&nbsp;operaciones<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;la&nbsp;lista&nbsp;de&nbsp;enteros&nbsp;correspondiente&nbsp;con&nbsp;la&nbsp;clave<br>
+&nbsp;&nbsp;&nbsp;&nbsp;privada</tt></dd></dl>
+ <dl><dt><a name="-list_opt_ordering_search_tree"><strong>list_opt_ordering_search_tree</strong></a>(m_roots, l:int, r:int)</dt><dd><tt>Devuelve&nbsp;una&nbsp;de&nbsp;las&nbsp;posibles&nbsp;listas&nbsp;de&nbsp;inserción<br>
+de&nbsp;los&nbsp;nodos&nbsp;en&nbsp;un&nbsp;árbol&nbsp;binario&nbsp;para&nbsp;obtener&nbsp;el&nbsp;árbol<br>
+de&nbsp;búsqueda&nbsp;óptimo.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;m_roots:&nbsp;La&nbsp;matriz&nbsp;que&nbsp;produce&nbsp;la&nbsp;solución<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dinámica&nbsp;a&nbsp;este&nbsp;problema<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l:&nbsp;Entero&nbsp;(Left)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;r:&nbsp;Entero&nbsp;(Right)<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista&nbsp;de&nbsp;inserción&nbsp;de&nbsp;un&nbsp;posible&nbsp;árbol&nbsp;de<br>
+&nbsp;&nbsp;&nbsp;&nbsp;búsqueda&nbsp;óptimo&nbsp;usando&nbsp;los&nbsp;nodos&nbsp;de&nbsp;left<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;right</tt></dd></dl>
+ <dl><dt><a name="-m_g_2_d_g"><strong>m_g_2_d_g</strong></a>(m_g)</dt><dd><tt>Transforma&nbsp;una&nbsp;matriz&nbsp;de&nbsp;adyacencias&nbsp;en&nbsp;listas&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;m_g&nbsp;--&nbsp;Grafo&nbsp;representado&nbsp;como&nbsp;matriz&nbsp;de&nbsp;adyacencias.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Grafo&nbsp;represenado&nbsp;como&nbsp;diccionario&nbsp;de&nbsp;listas&nbsp;de&nbsp;adyacencias</tt></dd></dl>
+ <dl><dt><a name="-max_common_subsequence_problem"><strong>max_common_subsequence_problem</strong></a>(str_1:str, str_2:str)</dt><dd><tt>Devuelve&nbsp;la&nbsp;matriz&nbsp;que&nbsp;resuelve&nbsp;el&nbsp;problema&nbsp;de&nbsp;la<br>
+subsecuencia&nbsp;más&nbsp;larga&nbsp;entre&nbsp;dos&nbsp;strings<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str_1:&nbsp;Primera&nbsp;string&nbsp;a&nbsp;utilizar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str_2:&nbsp;Segunda&nbsp;string&nbsp;en&nbsp;la&nbsp;que&nbsp;buscaremos&nbsp;la&nbsp;subseq<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;la&nbsp;matriz&nbsp;que&nbsp;resuelve&nbsp;el&nbsp;problema&nbsp;de&nbsp;encontrar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;la&nbsp;subsecuencia&nbsp;más&nbsp;larga&nbsp;entre&nbsp;dos&nbsp;strings.</tt></dd></dl>
+ <dl><dt><a name="-max_length_common_subsequence"><strong>max_length_common_subsequence</strong></a>(str_1:str, str_2:str)</dt><dd><tt>Devuelve&nbsp;la&nbsp;longitud&nbsp;de&nbsp;la&nbsp;subsecuencia&nbsp;más&nbsp;larga&nbsp;entre<br>
+dos&nbsp;strings.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str_1:&nbsp;Primera&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str_2:&nbsp;Segunda&nbsp;string<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;un&nbsp;entero&nbsp;con&nbsp;la&nbsp;longitud&nbsp;de&nbsp;la&nbsp;subsecuencia<br>
+&nbsp;&nbsp;&nbsp;&nbsp;más&nbsp;larga&nbsp;entre&nbsp;str_1&nbsp;y&nbsp;str_2</tt></dd></dl>
+ <dl><dt><a name="-mcd"><strong>mcd</strong></a>(x:int, y:int)</dt><dd><tt>Cálcula&nbsp;el&nbsp;máximo&nbsp;común&nbsp;divisor&nbsp;de&nbsp;dos&nbsp;números<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;:&nbsp;Un&nbsp;entero<br>
+&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;:&nbsp;Otro&nbsp;entero<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Máximo&nbsp;común&nbsp;divisor&nbsp;de&nbsp;x&nbsp;e&nbsp;y</tt></dd></dl>
+ <dl><dt><a name="-mh_block_decrypt"><strong>mh_block_decrypt</strong></a>(c:int, l_sc, inv:int, mod:int)</dt><dd><tt>Descifra&nbsp;un&nbsp;bloque&nbsp;usando&nbsp;la&nbsp;clave&nbsp;privada<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c:&nbsp;Bloque&nbsp;a&nbsp;descifrar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_sc:&nbsp;Sucesión&nbsp;super&nbsp;creciente<br>
+&nbsp;&nbsp;&nbsp;&nbsp;inv:&nbsp;Inverso&nbsp;multiplicativo&nbsp;de&nbsp;la&nbsp;clave&nbsp;privada<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mod:&nbsp;Módulo&nbsp;en&nbsp;el&nbsp;que&nbsp;se&nbsp;realizan&nbsp;las&nbsp;operaciones<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;una&nbsp;lista&nbsp;con&nbsp;los&nbsp;bits&nbsp;que&nbsp;corresponden<br>
+&nbsp;&nbsp;&nbsp;&nbsp;al&nbsp;bloque&nbsp;descifrado</tt></dd></dl>
+ <dl><dt><a name="-mh_decrypt"><strong>mh_decrypt</strong></a>(l_cifra, l_sc, inv:int, mod:int)</dt><dd><tt>Descifra&nbsp;un&nbsp;mensaje&nbsp;completo&nbsp;usando&nbsp;la&nbsp;clave&nbsp;privada<br>
+(Lista&nbsp;de&nbsp;bloques)<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_cifra:&nbsp;Lista&nbsp;de&nbsp;cifras&nbsp;que&nbsp;corresponden&nbsp;a&nbsp;los&nbsp;bloques&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encriptados<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_sc:&nbsp;Sucesión&nbsp;supercreciente&nbsp;de&nbsp;enteros&nbsp;de&nbsp;la&nbsp;clave&nbsp;priv<br>
+&nbsp;&nbsp;&nbsp;&nbsp;inv:&nbsp;Inverso&nbsp;multiplicativo&nbsp;de&nbsp;la&nbsp;clave&nbsp;priv<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mod:&nbsp;Módulo&nbsp;en&nbsp;el&nbsp;que&nbsp;se&nbsp;realiza&nbsp;el&nbsp;cifrado<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;una&nbsp;lista&nbsp;de&nbsp;bits&nbsp;con&nbsp;el&nbsp;mensaje&nbsp;entero&nbsp;descifrado.</tt></dd></dl>
+ <dl><dt><a name="-mh_encrypt"><strong>mh_encrypt</strong></a>(l_bits, l_pub, mod:int)</dt><dd><tt>Cifra&nbsp;la&nbsp;cadena&nbsp;de&nbsp;bits&nbsp;l_bits&nbsp;con&nbsp;la&nbsp;sucesión&nbsp;pública<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_bits:&nbsp;Lista&nbsp;de&nbsp;bits<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_pub:&nbsp;Sucesión&nbsp;pública<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mod:&nbsp;Módulo&nbsp;en&nbsp;el&nbsp;que&nbsp;se&nbsp;realizan&nbsp;las&nbsp;operaciones<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;una&nbsp;lista&nbsp;con&nbsp;los&nbsp;resultados&nbsp;de&nbsp;cada&nbsp;bloque&nbsp;de&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tamaño&nbsp;len(l_pub)&nbsp;cifrado</tt></dd></dl>
+ <dl><dt><a name="-min_coin_change_matrix"><strong>min_coin_change_matrix</strong></a>(c:int, l_coins)</dt><dd><tt>Función&nbsp;que&nbsp;devuelve&nbsp;la&nbsp;matriz&nbsp;del&nbsp;problema&nbsp;del&nbsp;cambio<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c:&nbsp;Entero&nbsp;que&nbsp;corresponden&nbsp;con&nbsp;el&nbsp;valor&nbsp;que&nbsp;se&nbsp;pretende<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;devolver.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_coins:&nbsp;Lista&nbsp;de&nbsp;enteros&nbsp;con&nbsp;los&nbsp;valores&nbsp;de&nbsp;las&nbsp;monedas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disponibles<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;la&nbsp;matriz&nbsp;de&nbsp;la&nbsp;solución&nbsp;dinámica</tt></dd></dl>
+ <dl><dt><a name="-min_coin_number"><strong>min_coin_number</strong></a>(c:int, l_coins)</dt><dd><tt>Devuelve&nbsp;el&nbsp;número&nbsp;mínimo&nbsp;de&nbsp;monedas&nbsp;que&nbsp;hacen&nbsp;falta<br>
+para&nbsp;devolver&nbsp;una&nbsp;cierta&nbsp;cantidad.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c:&nbsp;Valor&nbsp;que&nbsp;se&nbsp;pretende&nbsp;devolver<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_coins:&nbsp;Lista&nbsp;de&nbsp;enteros&nbsp;que&nbsp;corresponden&nbsp;con&nbsp;los<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valores&nbsp;de&nbsp;las&nbsp;monedas&nbsp;disponibles<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;un&nbsp;entero&nbsp;que&nbsp;corresponde&nbsp;con&nbsp;el&nbsp;mínimo&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;número&nbsp;de&nbsp;monedas&nbsp;que&nbsp;hacen&nbsp;falta&nbsp;para&nbsp;devolver&nbsp;c.<br>
+Nota:&nbsp;Es&nbsp;necesario&nbsp;que&nbsp;la&nbsp;lista&nbsp;l_coins&nbsp;siempre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disponga&nbsp;de&nbsp;la&nbsp;moneda&nbsp;1.</tt></dd></dl>
+ <dl><dt><a name="-min_path"><strong>min_path</strong></a>(d_prev, v)</dt><dd><tt>Recupera&nbsp;el&nbsp;camino&nbsp;minimo&nbsp;hasta&nbsp;v&nbsp;dado&nbsp;el&nbsp;retorno&nbsp;de&nbsp;Dijkstra.<br>
+&nbsp;<br>
+Argumento:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_prev&nbsp;--&nbsp;Lista&nbsp;de&nbsp;padres&nbsp;devuelta&nbsp;por&nbsp;Dijkstra.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v&nbsp;--&nbsp;Nodo&nbsp;final&nbsp;del&nbsp;camino&nbsp;buscado.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista&nbsp;con&nbsp;el&nbsp;camino&nbsp;de&nbsp;u&nbsp;a&nbsp;v&nbsp;([u&nbsp;x1&nbsp;x2&nbsp;...&nbsp;xk&nbsp;v])&nbsp;si&nbsp;existe.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Si&nbsp;no&nbsp;hay&nbsp;camino&nbsp;devuelve&nbsp;[].</tt></dd></dl>
+ <dl><dt><a name="-min_paths"><strong>min_paths</strong></a>(d_prev)</dt><dd><tt>Devuelve&nbsp;un&nbsp;hash&nbsp;con&nbsp;todos&nbsp;los&nbsp;caminos&nbsp;minimos&nbsp;encontrados&nbsp;en&nbsp;Dijkstra.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_prev&nbsp;--&nbsp;Lista&nbsp;de&nbsp;padres&nbsp;devuelta&nbsp;por&nbsp;Dijkstra.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Un&nbsp;hash&nbsp;que&nbsp;asocia&nbsp;a&nbsp;cada&nbsp;nodo&nbsp;su&nbsp;camino&nbsp;minimo&nbsp;({u:&nbsp;<a href="#-min_path">min_path</a>(u)}).</tt></dd></dl>
+ <dl><dt><a name="-mod_mult_inv"><strong>mod_mult_inv</strong></a>(l_sc)</dt><dd><tt>Partiendo&nbsp;de&nbsp;una&nbsp;sucesión&nbsp;supercreciente&nbsp;encuentra&nbsp;un&nbsp;mod,&nbsp;p&nbsp;y&nbsp;q&nbsp;aleatorios<br>
+Que&nbsp;compondrán&nbsp;el&nbsp;resto&nbsp;de&nbsp;la&nbsp;clave&nbsp;privada&nbsp;del&nbsp;cifrado<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_sc:&nbsp;Es&nbsp;una&nbsp;lista&nbsp;de&nbsp;enteros&nbsp;(sucesión&nbsp;supercreciente)<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;p,q,mod&nbsp;donde&nbsp;p*q&nbsp;=&nbsp;1&nbsp;módulo&nbsp;mod.&nbsp;Y&nbsp;mod&nbsp;es&nbsp;un&nbsp;valor&nbsp;mayor&nbsp;que&nbsp;la<br>
+&nbsp;&nbsp;&nbsp;&nbsp;suma&nbsp;de&nbsp;toda&nbsp;la&nbsp;sucesión.</tt></dd></dl>
+ <dl><dt><a name="-multiplier"><strong>multiplier</strong></a>(mod:int, mult_ini:int)</dt><dd><tt>Genera&nbsp;número&nbsp;aleatorio&nbsp;p&nbsp;que&nbsp;cumple:&nbsp;<a href="#-mcd">mcd</a>(p,mod)==1&nbsp;y&nbsp;mult_ini&lt;p&lt;mod<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mod:&nbsp;Número&nbsp;con&nbsp;el&nbsp;que&nbsp;se&nbsp;buscará&nbsp;otro&nbsp;coprimo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;multi_ini:&nbsp;Cota&nbsp;inferior&nbsp;del&nbsp;número&nbsp;a&nbsp;generar&nbsp;<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;el&nbsp;entero&nbsp;p</tt></dd></dl>
+ <dl><dt><a name="-n2_log_n"><strong>n2_log_n</strong></a>(n)</dt><dd><tt>Función&nbsp;aportada&nbsp;en&nbsp;el&nbsp;notebook&nbsp;auxiliar</tt></dd></dl>
+ <dl><dt><a name="-nx_g_2_d_g"><strong>nx_g_2_d_g</strong></a>(nx_g)</dt><dd><tt>Convierte&nbsp;un&nbsp;grafo&nbsp;de&nbsp;NetworkX&nbsp;en&nbsp;uno&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nx_g&nbsp;--&nbsp;Grafo&nbsp;como&nbsp;objeto&nbsp;de&nbsp;NetworkX.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Grafo&nbsp;como&nbsp;lista&nbsp;de&nbsp;adyacencias.</tt></dd></dl>
+ <dl><dt><a name="-o_a_tables"><strong>o_a_tables</strong></a>(u, d_mg, p, s, o, a, c)</dt><dd><tt>Modificación&nbsp;de&nbsp;DFS&nbsp;para&nbsp;calcular&nbsp;las&nbsp;tablas&nbsp;o&nbsp;y&nbsp;a<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;--&nbsp;Un&nbsp;vértice&nbsp;del&nbsp;grafo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_mg&nbsp;--&nbsp;Diccionario&nbsp;de&nbsp;un&nbsp;multigrafo&nbsp;en&nbsp;formato<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p&nbsp;({nodo:nodo})&nbsp;--&nbsp;Tabla&nbsp;de&nbsp;previos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;({nodo:bool})&nbsp;--&nbsp;Tabla&nbsp;de&nbsp;vistos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;({nodo:int})&nbsp;--&nbsp;Tabla&nbsp;orden&nbsp;de&nbsp;paso<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;({nodo:int})&nbsp;--&nbsp;Tabla&nbsp;de&nbsp;orden&nbsp;de&nbsp;ascenso<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c&nbsp;(int)&nbsp;--&nbsp;Contador&nbsp;para&nbsp;actualizar&nbsp;la&nbsp;tabla&nbsp;de&nbsp;orden<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;el&nbsp;contador&nbsp;de&nbsp;la&nbsp;tabla&nbsp;de&nbsp;orden&nbsp;(int)</tt></dd></dl>
+ <dl><dt><a name="-optimal_change"><strong>optimal_change</strong></a>(c:int, l_coins)</dt><dd><tt>Devuelve&nbsp;uno&nbsp;de&nbsp;los&nbsp;posibles&nbsp;cambios&nbsp;que&nbsp;se&nbsp;pueden<br>
+dar&nbsp;con&nbsp;el&nbsp;mínimo&nbsp;número&nbsp;de&nbsp;monedas&nbsp;posibles<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c:&nbsp;Valor&nbsp;a&nbsp;devolver<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_coins:&nbsp;Lista&nbsp;de&nbsp;enteros&nbsp;con&nbsp;el&nbsp;valor&nbsp;de&nbsp;las&nbsp;monedas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disponibles<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;un&nbsp;diccionario&nbsp;que&nbsp;indica&nbsp;cuántas&nbsp;monedas&nbsp;de<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cada&nbsp;tipo&nbsp;hacen&nbsp;falta&nbsp;para&nbsp;devolver&nbsp;c&nbsp;con&nbsp;el&nbsp;mín&nbsp;núm&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;de&nbsp;moendas:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dic[moneda]&nbsp;=&nbsp;número&nbsp;de&nbsp;monedas</tt></dd></dl>
+ <dl><dt><a name="-optimal_order"><strong>optimal_order</strong></a>(l_probs)</dt><dd><tt>Devuelve&nbsp;las&nbsp;dos&nbsp;matrices&nbsp;que&nbsp;resuelven&nbsp;el&nbsp;problema&nbsp;del&nbsp;<br>
+árbol&nbsp;de&nbsp;búsqueda&nbsp;óptimo<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;l_probs:&nbsp;Una&nbsp;lista&nbsp;con&nbsp;las&nbsp;probabilidades&nbsp;de&nbsp;cada&nbsp;nodo<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dos&nbsp;matrices:&nbsp;la&nbsp;primera&nbsp;indica&nbsp;la&nbsp;solución&nbsp;dinámica<br>
+&nbsp;&nbsp;&nbsp;&nbsp;para&nbsp;encontrar&nbsp;los&nbsp;pesos&nbsp;de&nbsp;los&nbsp;árboles&nbsp;óptimos;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;la&nbsp;segunda&nbsp;indica&nbsp;las&nbsp;raíces&nbsp;de&nbsp;dichos&nbsp;árboles.</tt></dd></dl>
+ <dl><dt><a name="-p_o_a_driver"><strong>p_o_a_driver</strong></a>(d_mg, u=0)</dt><dd><tt>Calcula&nbsp;las&nbsp;tabla&nbsp;P,&nbsp;O&nbsp;y&nbsp;A&nbsp;de&nbsp;un&nbsp;multigrafo<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_mg&nbsp;--&nbsp;Lista&nbsp;de&nbsp;adyacencias&nbsp;de&nbsp;multigrafo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;--&nbsp;Nodo&nbsp;inicial&nbsp;desde&nbsp;el&nbsp;cual&nbsp;iniciar&nbsp;el&nbsp;árbol&nbsp;de&nbsp;DFS<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;tres&nbsp;diccionarios:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p&nbsp;({nodo:nodo})&nbsp;--&nbsp;Dict&nbsp;de&nbsp;padres&nbsp;del&nbsp;árbol&nbsp;DFS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;({nodo:int})&nbsp;--&nbsp;Órden&nbsp;de&nbsp;descubrimiento&nbsp;del&nbsp;árbol<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;({nodo:int})&nbsp;--&nbsp;Órden&nbsp;de&nbsp;ascenso&nbsp;de&nbsp;cada&nbsp;nodo</tt></dd></dl>
+ <dl><dt><a name="-print_d_g"><strong>print_d_g</strong></a>(d_g)</dt><dd><tt>Función&nbsp;aportada&nbsp;en&nbsp;el&nbsp;notebook&nbsp;auxiliar</tt></dd></dl>
+ <dl><dt><a name="-print_d_mg"><strong>print_d_mg</strong></a>(g)</dt></dl>
+ <dl><dt><a name="-print_m_g"><strong>print_m_g</strong></a>(m_g)</dt><dd><tt>Función&nbsp;aportada&nbsp;en&nbsp;el&nbsp;notebook&nbsp;auxiliar</tt></dd></dl>
+ <dl><dt><a name="-rand_matr_pos_graph"><strong>rand_matr_pos_graph</strong></a>(n_nodes, sparse_factor, max_weight=50, decimals=0)</dt><dd><tt>Genera&nbsp;un&nbsp;grafo&nbsp;aleatorio&nbsp;en&nbsp;forma&nbsp;de&nbsp;matriz&nbsp;de&nbsp;adyacencia.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes&nbsp;--&nbsp;Numero&nbsp;de&nbsp;nodos&nbsp;del&nbsp;grafo&nbsp;(del&nbsp;0&nbsp;al&nbsp;n_nodes-1).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sparse_factor&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;APROXIMADO&nbsp;de&nbsp;la&nbsp;matriz&nbsp;generada.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_weight&nbsp;--&nbsp;Peso&nbsp;maximo&nbsp;de&nbsp;las&nbsp;ramas&nbsp;del&nbsp;grafo&nbsp;(son&nbsp;enteros).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;decimals&nbsp;--&nbsp;??.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Una&nbsp;matriz&nbsp;de&nbsp;adyacencias&nbsp;que&nbsp;representa&nbsp;al&nbsp;grafo&nbsp;generado.</tt></dd></dl>
+ <dl><dt><a name="-rand_weighted_multigraph"><strong>rand_weighted_multigraph</strong></a>(n_nodes, prob=0.2, num_max_multiple_edges=1, max_weight=50.0, decimals=0, fl_unweighted=False, fl_diag=True)</dt><dd><tt>Genera&nbsp;un&nbsp;multigrafo&nbsp;aleatorio&nbsp;dirigido<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes&nbsp;(int)&nbsp;--&nbsp;Número&nbsp;de&nbsp;nodos&nbsp;del&nbsp;multigrafo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;prob&nbsp;(float)&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersión&nbsp;(entre&nbsp;0&nbsp;y&nbsp;1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;num_max_multiple_edges&nbsp;(int)&nbsp;--&nbsp;Número&nbsp;máximo&nbsp;de&nbsp;ramas&nbsp;entre&nbsp;dos&nbsp;nodos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_weight&nbsp;(float)&nbsp;--&nbsp;Peso&nbsp;&nbsp;máximo&nbsp;de&nbsp;una&nbsp;arista<br>
+&nbsp;&nbsp;&nbsp;&nbsp;decimals&nbsp;(int)&nbsp;--&nbsp;Número&nbsp;de&nbsp;decimales&nbsp;de&nbsp;los&nbsp;pesos&nbsp;de&nbsp;cada&nbsp;rama<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fl_unweighted&nbsp;(bool)&nbsp;--&nbsp;False&nbsp;si&nbsp;el&nbsp;grafo&nbsp;es&nbsp;ponderado,&nbsp;True&nbsp;si&nbsp;no&nbsp;lo&nbsp;es<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fl_dia&nbsp;(bool)&nbsp;--&nbsp;False&nbsp;si&nbsp;no&nbsp;se&nbsp;permiten&nbsp;aristas&nbsp;ciclos,&nbsp;True&nbsp;si&nbsp;se&nbsp;permiten<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Retorna&nbsp;las&nbsp;listas&nbsp;de&nbsp;adyacencias&nbsp;del&nbsp;multigrafo&nbsp;resultante&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;({int:{int:{int:int}}})</tt></dd></dl>
+ <dl><dt><a name="-rand_weighted_undirected_multigraph"><strong>rand_weighted_undirected_multigraph</strong></a>(n_nodes, prob=0.2, num_max_multiple_edges=1, max_weight=50.0, decimals=0, fl_unweighted=False, fl_diag=True)</dt><dd><tt>Genera&nbsp;un&nbsp;multigrafo&nbsp;aleatorio&nbsp;dirigido<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes&nbsp;(int)&nbsp;--&nbsp;Número&nbsp;de&nbsp;nodos&nbsp;del&nbsp;multigrafo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;prob&nbsp;(float)&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersión&nbsp;(entre&nbsp;0&nbsp;y&nbsp;1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;num_max_multiple_edges&nbsp;(int)&nbsp;--&nbsp;Número&nbsp;máximo&nbsp;de&nbsp;ramas&nbsp;entre&nbsp;dos&nbsp;nodos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_weight&nbsp;(float)&nbsp;--&nbsp;Peso&nbsp;&nbsp;máximo&nbsp;de&nbsp;una&nbsp;arista<br>
+&nbsp;&nbsp;&nbsp;&nbsp;decimals&nbsp;(int)&nbsp;--&nbsp;Número&nbsp;de&nbsp;decimales&nbsp;de&nbsp;los&nbsp;pesos&nbsp;de&nbsp;cada&nbsp;rama<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fl_unweighted&nbsp;(bool)&nbsp;--&nbsp;False&nbsp;si&nbsp;el&nbsp;grafo&nbsp;es&nbsp;ponderado,&nbsp;True&nbsp;si&nbsp;no&nbsp;lo&nbsp;es<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fl_dia&nbsp;(bool)&nbsp;--&nbsp;False&nbsp;si&nbsp;no&nbsp;se&nbsp;permiten&nbsp;aristas&nbsp;ciclos,&nbsp;True&nbsp;si&nbsp;se&nbsp;permiten<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Retorna&nbsp;las&nbsp;listas&nbsp;de&nbsp;adyacencias&nbsp;del&nbsp;multigrafo&nbsp;resultante&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;({int:{int:{int:int}}})</tt></dd></dl>
+ <dl><dt><a name="-read_object"><strong>read_object</strong></a>(f_name, save_path='.')</dt><dd><tt>Carga&nbsp;un&nbsp;objeto&nbsp;serializado&nbsp;con&nbsp;pickle&nbsp;de&nbsp;un&nbsp;fichero&nbsp;comprimido.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;f_name&nbsp;--&nbsp;Nombre&nbsp;del&nbsp;fichero&nbsp;que&nbsp;contiene&nbsp;el&nbsp;objeto.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;save_path&nbsp;--&nbsp;Ruta&nbsp;al&nbsp;directorio&nbsp;donde&nbsp;esta&nbsp;f_name.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Objeto&nbsp;cargado.</tt></dd></dl>
+ <dl><dt><a name="-save_object"><strong>save_object</strong></a>(obj, f_name='obj.pklz', save_path='.')</dt><dd><tt>Serializa&nbsp;con&nbsp;pickle&nbsp;y&nbsp;guarda&nbsp;un&nbsp;objeto&nbsp;en&nbsp;un&nbsp;fichero&nbsp;comprimido.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj&nbsp;--&nbsp;Objeto&nbsp;que&nbsp;queremos&nbsp;serializar.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;f_name&nbsp;--&nbsp;Nombre&nbsp;del&nbsp;fichero&nbsp;en&nbsp;el&nbsp;que&nbsp;escribiremos&nbsp;el&nbsp;objeto.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;save_path&nbsp;--&nbsp;Ruta&nbsp;hasta&nbsp;el&nbsp;directorio&nbsp;donde&nbsp;se&nbsp;escribe&nbsp;el&nbsp;fichero.</tt></dd></dl>
+ <dl><dt><a name="-time"><strong>time</strong></a>(...)</dt><dd><tt><a href="#-time">time</a>()&nbsp;-&gt;&nbsp;floating&nbsp;point&nbsp;number<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;time&nbsp;in&nbsp;seconds&nbsp;since&nbsp;the&nbsp;Epoch.<br>
+Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;the&nbsp;system&nbsp;clock&nbsp;provides&nbsp;them.</tt></dd></dl>
+ <dl><dt><a name="-time_dijks_rho"><strong>time_dijks_rho</strong></a>(rho_ini, rho_fin, step, dijks, generate, n_nodes=100, n_graphs=30, for_all_nodes=True)</dt><dd><tt>Calcula&nbsp;tiempos&nbsp;de&nbsp;ejecucion&nbsp;de&nbsp;Dijkstra&nbsp;iterando&nbsp;sobre&nbsp;el&nbsp;<br>
+factor&nbsp;de&nbsp;dispersion.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rho_ini&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;inicial.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rho_fin&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;final.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;step&nbsp;--&nbsp;Incremento&nbsp;del&nbsp;factor&nbsp;de&nbsp;dispersion&nbsp;en&nbsp;cada&nbsp;iteracion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dijks&nbsp;(funcion)--&nbsp;Algoritmo&nbsp;de&nbsp;Dijkstra&nbsp;a&nbsp;utilizar.&nbsp;Recibe&nbsp;el&nbsp;grafo&nbsp;y&nbsp;el&nbsp;nodo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inicial.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;generate&nbsp;(funcion)--&nbsp;Generador&nbsp;de&nbsp;grafos&nbsp;aleatorios.&nbsp;Recibe&nbsp;número&nbsp;de&nbsp;nodos&nbsp;y<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factor&nbsp;de&nbsp;dispersion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes&nbsp;--&nbsp;Número&nbsp;fijo&nbsp;de&nbsp;nodos&nbsp;con&nbsp;los&nbsp;que&nbsp;se&nbsp;genera&nbsp;el&nbsp;grafo&nbsp;aleatorio.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_graphs&nbsp;--&nbsp;Número&nbsp;de&nbsp;grafos&nbsp;generados&nbsp;en&nbsp;cada&nbsp;iteracion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for_all_nodes&nbsp;(boolean)--&nbsp;Si&nbsp;Dijkstra&nbsp;se&nbsp;ejecuta&nbsp;desde&nbsp;todos&nbsp;los&nbsp;nodos&nbsp;o&nbsp;solo&nbsp;desde<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;el&nbsp;inicial.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista&nbsp;de&nbsp;tiempos&nbsp;medios&nbsp;correspondientes&nbsp;a&nbsp;cada&nbsp;factor&nbsp;de&nbsp;dispersion&nbsp;desde&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rho_ini&nbsp;a&nbsp;rho_fin&nbsp;(incluidos&nbsp;ambos)&nbsp;a&nbsp;pasos&nbsp;de&nbsp;step.<br>
+Nota:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;En&nbsp;caso&nbsp;de&nbsp;que&nbsp;for_all_nodes&nbsp;sea&nbsp;True&nbsp;entonces&nbsp;el&nbsp;tiempo&nbsp;de&nbsp;ejecucion&nbsp;corresponde<br>
+&nbsp;&nbsp;&nbsp;&nbsp;con&nbsp;el&nbsp;tiempo&nbsp;que&nbsp;tarda&nbsp;en&nbsp;ejecutar&nbsp;Dijkstra&nbsp;desde&nbsp;TODOS&nbsp;los&nbsp;nodos.</tt></dd></dl>
+ <dl><dt><a name="-time_dijkstra"><strong>time_dijkstra</strong></a>(n_graphs, n_nodes_ini, n_nodes_fin, step, generate, dijks, sparse_factor=0.25)</dt><dd><tt>Funcion&nbsp;que&nbsp;calcula&nbsp;los&nbsp;tiempos&nbsp;de&nbsp;ejecucion&nbsp;de&nbsp;Dijkstra&nbsp;para&nbsp;varios&nbsp;tamaños.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_graphs&nbsp;--&nbsp;Número&nbsp;de&nbsp;grafos&nbsp;a&nbsp;generar&nbsp;por&nbsp;cada&nbsp;tamaño.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes_ini&nbsp;--&nbsp;Primer&nbsp;tamaño&nbsp;de&nbsp;grafo&nbsp;utilizado.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes_fin&nbsp;--&nbsp;Último&nbsp;tamaño&nbsp;de&nbsp;grafo&nbsp;utilizado.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;step&nbsp;--&nbsp;Incremento&nbsp;del&nbsp;número&nbsp;de&nbsp;nodos&nbsp;en&nbsp;cada&nbsp;iteracion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;generate&nbsp;(funcion)--&nbsp;Funcion&nbsp;que&nbsp;genera&nbsp;un&nbsp;grafo&nbsp;aleatorio&nbsp;dado&nbsp;el&nbsp;número&nbsp;de<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodos&nbsp;y&nbsp;el&nbsp;factor&nbsp;de&nbsp;dispersion.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dijks&nbsp;(funcion)--&nbsp;Dijkstra&nbsp;a&nbsp;utilizar.&nbsp;Recibe&nbsp;el&nbsp;grafo&nbsp;generado&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;el&nbsp;nodo&nbsp;de&nbsp;partida.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sparse_factor&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersion&nbsp;de&nbsp;los&nbsp;grafos&nbsp;generados.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelva&nbsp;una&nbsp;lista&nbsp;de&nbsp;tiempos&nbsp;en&nbsp;segundos.&nbsp;El&nbsp;primer&nbsp;tiempo&nbsp;corresponde<br>
+&nbsp;&nbsp;&nbsp;&nbsp;con&nbsp;el&nbsp;tiempo&nbsp;medio&nbsp;necesario&nbsp;para&nbsp;ejecutar&nbsp;Dijkstra&nbsp;desde&nbsp;todos&nbsp;los<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nodos&nbsp;en&nbsp;un&nbsp;grafo&nbsp;de&nbsp;n_nodes_ini,&nbsp;el&nbsp;segundo&nbsp;correspondera&nbsp;con&nbsp;un&nbsp;grafo&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;de&nbsp;n_nodes_ini+step,&nbsp;asi&nbsp;sucesivamente&nbsp;hasta&nbsp;n_nodes_fin.<br>
+Nota:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Los&nbsp;tiempos&nbsp;medios&nbsp;devueltos&nbsp;corresponden&nbsp;con&nbsp;el&nbsp;tiempo&nbsp;medio&nbsp;para<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ejecutar&nbsp;Dijkstra&nbsp;desde&nbsp;TODOS&nbsp;los&nbsp;nodos&nbsp;(NO&nbsp;desde&nbsp;un&nbsp;solo&nbsp;nodo).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Se&nbsp;toma&nbsp;esta&nbsp;decision&nbsp;porque&nbsp;la&nbsp;funcion&nbsp;de&nbsp;fit_plot&nbsp;proporcionada<br>
+&nbsp;&nbsp;&nbsp;&nbsp;busca&nbsp;ajustar&nbsp;una&nbsp;n^3*log(n).<br>
+Nota2:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Utilizamos&nbsp;el&nbsp;mismo&nbsp;codigo&nbsp;tanto&nbsp;para&nbsp;diccionarios,&nbsp;como&nbsp;para&nbsp;matrices<br>
+&nbsp;&nbsp;&nbsp;&nbsp;como&nbsp;para&nbsp;grafos&nbsp;de&nbsp;networkx,&nbsp;entonces&nbsp;los&nbsp;vertices&nbsp;tienen&nbsp;que&nbsp;ser&nbsp;nums<br>
+&nbsp;&nbsp;&nbsp;&nbsp;de&nbsp;entre&nbsp;0&nbsp;y&nbsp;numero&nbsp;de&nbsp;nodos&nbsp;&nbsp;-1</tt></dd></dl>
+ <dl><dt><a name="-time_dijkstra_d"><strong>time_dijkstra_d</strong></a>(n_graphs, n_nodes_ini, n_nodes_fin, step, sparse_factor=0.25)</dt><dd><tt>Instancia&nbsp;de&nbsp;time_dijkstra&nbsp;para&nbsp;lista&nbsp;de&nbsp;adyacencia.<br>
+&nbsp;<br>
+NOTA:&nbsp;Detalles&nbsp;del&nbsp;funcionamiento&nbsp;en&nbsp;time_dijkstra.</tt></dd></dl>
+ <dl><dt><a name="-time_dijkstra_m"><strong>time_dijkstra_m</strong></a>(n_graphs, n_nodes_ini, n_nodes_fin, step, sparse_factor=0.25)</dt><dd><tt>Instancia&nbsp;de&nbsp;time_dijkstra&nbsp;para&nbsp;matrices&nbsp;de&nbsp;adyacencia.<br>
+&nbsp;<br>
+NOTA:&nbsp;Detalles&nbsp;del&nbsp;funcionamiento&nbsp;en&nbsp;time_dijkstra.</tt></dd></dl>
+ <dl><dt><a name="-time_dijkstra_nx"><strong>time_dijkstra_nx</strong></a>(n_graphs, n_nodes_ini, n_nodes_fin, step, sparse_factor=0.25)</dt><dd><tt>Instancia&nbsp;de&nbsp;time_dijkstra&nbsp;para&nbsp;grafos&nbsp;de&nbsp;NetworkX.<br>
+&nbsp;<br>
+NOTA:&nbsp;Detalles&nbsp;del&nbsp;funcionamiento&nbsp;en&nbsp;time_dijkstra.</tt></dd></dl>
+ <dl><dt><a name="-time_kruskal"><strong>time_kruskal</strong></a>(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc)</dt><dd><tt>Calcula&nbsp;los&nbsp;tiempos&nbsp;de&nbsp;ejecución&nbsp;de&nbsp;Kruskal.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_graphs&nbsp;(int)&nbsp;--&nbsp;Número&nbsp;de&nbsp;grafos&nbsp;a&nbsp;generar&nbsp;por&nbsp;cada&nbsp;tamaño<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes_ini&nbsp;(int)&nbsp;--&nbsp;Tamaño&nbsp;inicial&nbsp;(de&nbsp;nodos)&nbsp;del&nbsp;grafo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes_fin&nbsp;(int)&nbsp;--&nbsp;Tamaño&nbsp;final&nbsp;(de&nbsp;nodos)&nbsp;del&nbsp;grafo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;step&nbsp;(int)&nbsp;--&nbsp;Salto&nbsp;de&nbsp;tamaños&nbsp;entre&nbsp;pruebas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;prob&nbsp;(float)&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersión.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fl_cc&nbsp;(bool)&nbsp;--&nbsp;Si&nbsp;se&nbsp;utiliza,&nbsp;o&nbsp;no,&nbsp;compresión&nbsp;de&nbsp;caminos&nbsp;en&nbsp;el&nbsp;CD.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;un&nbsp;array&nbsp;con&nbsp;los&nbsp;tiempos&nbsp;medios&nbsp;de&nbsp;ejecución&nbsp;por&nbsp;cada&nbsp;tamaño&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;de&nbsp;grafo.&nbsp;SOLO&nbsp;se&nbsp;toman&nbsp;en&nbsp;cuenta&nbsp;los&nbsp;tiempos&nbsp;de&nbsp;ejecución&nbsp;de&nbsp;los&nbsp;grafos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;conexos.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Si&nbsp;para&nbsp;alguno&nbsp;de&nbsp;los&nbsp;tamaños&nbsp;pasa&nbsp;que&nbsp;todos&nbsp;los&nbsp;grafos&nbsp;son&nbsp;no&nbsp;conexos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;entonces&nbsp;la&nbsp;función&nbsp;devuelve&nbsp;una&nbsp;lista&nbsp;vacía.</tt></dd></dl>
+ <dl><dt><a name="-time_kruskal_2"><strong>time_kruskal_2</strong></a>(n_graphs, n_nodes_ini, n_nodes_fin, step, prob, fl_cc)</dt><dd><tt>Calcula&nbsp;los&nbsp;tiempos&nbsp;de&nbsp;ejecución&nbsp;de&nbsp;Kruskal,<br>
+sin&nbsp;tener&nbsp;en&nbsp;cuenta&nbsp;el&nbsp;tiempo&nbsp;de&nbsp;inserción&nbsp;inicial&nbsp;en&nbsp;la&nbsp;cola&nbsp;de&nbsp;prioridad.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_graphs&nbsp;(int)&nbsp;--&nbsp;Número&nbsp;de&nbsp;grafos&nbsp;a&nbsp;generar&nbsp;por&nbsp;cada&nbsp;tamaño<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes_ini&nbsp;(int)&nbsp;--&nbsp;Tamaño&nbsp;inicial&nbsp;(de&nbsp;nodos)&nbsp;del&nbsp;grafo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes_fin&nbsp;(int)&nbsp;--&nbsp;Tamaño&nbsp;final&nbsp;(de&nbsp;nodos)&nbsp;del&nbsp;grafo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;step&nbsp;(int)&nbsp;--&nbsp;Salto&nbsp;de&nbsp;tamaños&nbsp;entre&nbsp;pruebas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;prob&nbsp;(float)&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersión.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fl_cc&nbsp;(bool)&nbsp;--&nbsp;Si&nbsp;se&nbsp;utiliza,&nbsp;o&nbsp;no,&nbsp;compresión&nbsp;de&nbsp;caminos&nbsp;en&nbsp;el&nbsp;CD.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;un&nbsp;array&nbsp;con&nbsp;los&nbsp;tiempos&nbsp;medios&nbsp;de&nbsp;ejecución&nbsp;por&nbsp;cada&nbsp;tamaño&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;de&nbsp;grafo.&nbsp;SOLO&nbsp;se&nbsp;toman&nbsp;en&nbsp;cuenta&nbsp;los&nbsp;tiempos&nbsp;de&nbsp;ejecución&nbsp;de&nbsp;los&nbsp;grafos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;conexos.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Si&nbsp;para&nbsp;alguno&nbsp;de&nbsp;los&nbsp;tamaños&nbsp;pasa&nbsp;que&nbsp;todos&nbsp;los&nbsp;grafos&nbsp;son&nbsp;no&nbsp;conexos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;entonces&nbsp;la&nbsp;función&nbsp;devuelve&nbsp;una&nbsp;lista&nbsp;vacía.</tt></dd></dl>
+ <dl><dt><a name="-time_pda"><strong>time_pda</strong></a>(n_graphs, n_nodes_ini, n_nodes_fin, step, prob)</dt><dd><tt>Calcula&nbsp;los&nbsp;tiempos&nbsp;de&nbsp;ejecución&nbsp;del&nbsp;cómputo&nbsp;de&nbsp;las&nbsp;tablas&nbsp;P,&nbsp;O&nbsp;y&nbsp;A.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_graphs&nbsp;(int)&nbsp;--&nbsp;Número&nbsp;de&nbsp;grafos&nbsp;a&nbsp;generar&nbsp;por&nbsp;cada&nbsp;tamaño<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes_ini&nbsp;(int)&nbsp;--&nbsp;Tamaño&nbsp;inicial&nbsp;(de&nbsp;nodos)&nbsp;del&nbsp;grafo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_nodes_fin&nbsp;(int)&nbsp;--&nbsp;Tamaño&nbsp;final&nbsp;(de&nbsp;nodos)&nbsp;del&nbsp;grafo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;step&nbsp;(int)&nbsp;--&nbsp;Salto&nbsp;de&nbsp;tamaños&nbsp;entre&nbsp;pruebas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;prob&nbsp;(float)&nbsp;--&nbsp;Factor&nbsp;de&nbsp;dispersión.<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Devuelve&nbsp;un&nbsp;array&nbsp;con&nbsp;los&nbsp;tiempos&nbsp;medios&nbsp;de&nbsp;ejecución&nbsp;por&nbsp;cada&nbsp;tamaño&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;de&nbsp;grafo.&nbsp;SOLO&nbsp;se&nbsp;toman&nbsp;en&nbsp;cuenta&nbsp;los&nbsp;tiempos&nbsp;de&nbsp;ejecución&nbsp;de&nbsp;los&nbsp;grafos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;conexos.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Si&nbsp;para&nbsp;alguno&nbsp;de&nbsp;los&nbsp;tamaños&nbsp;pasa&nbsp;que&nbsp;todos&nbsp;los&nbsp;grafos&nbsp;son&nbsp;no&nbsp;conexos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;entonces&nbsp;la&nbsp;función&nbsp;devuelve&nbsp;una&nbsp;lista&nbsp;vacía.</tt></dd></dl>
+ <dl><dt><a name="-union"><strong>union</strong></a>(rep_1, rep_2, d_cd)</dt><dd><tt>Une&nbsp;dos&nbsp;conjuntos&nbsp;de&nbsp;la&nbsp;estructura&nbsp;CD.<br>
+&nbsp;<br>
+Argumentos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rep_1&nbsp;--&nbsp;Representante&nbsp;de&nbsp;un&nbsp;conjunto&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rep_2&nbsp;--&nbsp;Representante&nbsp;de&nbsp;otro&nbsp;conjunto<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d_cd&nbsp;--&nbsp;Estructura&nbsp;de&nbsp;conjunto&nbsp;disjunto<br>
+Retorno:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;El&nbsp;representante&nbsp;resultante&nbsp;de&nbsp;unir&nbsp;ambos&nbsp;conjuntos.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>MAX_RAND_ADD</strong> = 1000</td></tr></table>
+</body></html>
